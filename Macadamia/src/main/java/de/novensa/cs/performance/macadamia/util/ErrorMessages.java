@@ -9,9 +9,7 @@ import java.lang.reflect.Method;
  */
 public class ErrorMessages {
 
-    /*
-    Self-explanatory Constants to take right away
-     */
+    // Self-explanatory Constants to take right away
     private static final String METHOD_NOT_INVOKABLE = "The method '%s' cannot be invoked on the Class '%s'. Please " +
             "see the code or documentation.";
 
@@ -21,10 +19,9 @@ public class ErrorMessages {
             "Java Primitives. Method invocations are possible on instance objects only.";
 
 
-    /*
-    Methods to format a little more complex messages
-     */
-    public static final String getMethodNotInvokable(Method method, Class clazz) {
+
+    // Methods to format a little more complex messages
+    public static String getMethodNotInvokable(Method method, Class clazz) {
         return String.format(METHOD_NOT_INVOKABLE, method.toString(), clazz.getCanonicalName());
     }
 }

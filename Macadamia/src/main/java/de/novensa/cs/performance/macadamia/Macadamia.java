@@ -13,9 +13,8 @@ public class Macadamia<T> extends IndicesController<T> {
     private List<T> objects;
     private Collection<String> reflectiveAttributes;
 
-    /*
-    Initialization
-     */
+
+    // major initialization
     public Macadamia(List<T> objects, String... reflectiveAttributes) {
         super(objects, reflectiveAttributes);
         this.objects = objects;
@@ -39,9 +38,7 @@ public class Macadamia<T> extends IndicesController<T> {
     }
 
 
-    /*
-    Getter and setter
-     */
+    // basic bean members
     public List<T> getObjects() {
         return objects;
     }

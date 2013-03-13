@@ -14,7 +14,7 @@ import java.util.*;
 public class ValueAccessorChain {
 
     List<Object> valueAccessorChain = new ArrayList<Object>();
-    Map<String, Method[]> invokableMethodsChache = new TreeMap<String, Method[]>();
+    private SharedClassToMethodsCache sharedClassToMethodsCache = SharedClassToMethodsCache.getInstance();
     final Class basicInstance;
     Class lastSimulatedMethodInvocationsResult;
 
@@ -25,12 +25,12 @@ public class ValueAccessorChain {
 
         Method[] methods = lastSimulatedMethodInvocationsResult.getMethods();
         // caching the possible Methods per Class
-        if (!invokableMethodsChache.containsKey(lastSimulatedMethodInvocationsResult.getCanonicalName())) {
-            invokableMethodsChache.put(lastSimulatedMethodInvocationsResult.getCanonicalName(), methods);
+        if (!sharedClassToMethodsCache.getCache().containsKey(lastSimulatedMethodInvocationsResult.getCanonicalName())) {
+            sharedClassToMethodsCache.getCache().put(lastSimulatedMethodInvocationsResult.getCanonicalName(), methods);
         }
 
         // is Method applicable?
-        if (!isPossible(invokableMethodsChache.get(lastSimulatedMethodInvocationsResult.getCanonicalName()), method)) {
+        if (!isPossible(sharedClassToMethodsCache.getCache().get(lastSimulatedMethodInvocationsResult.getCanonicalName()), method)) {
             throw new IllegalStateException(
                     ErrorMessages.getMethodNotInvokable(method, lastSimulatedMethodInvocationsResult));
         } else {
