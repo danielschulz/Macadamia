@@ -1,6 +1,5 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
-import com.sun.istack.internal.NotNull;
 import de.novensa.cs.performance.macadamia.util.ErrorMessages;
 
 import java.lang.reflect.Method;
@@ -11,6 +10,7 @@ import java.util.*;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings("UnusedDeclaration")
 public class ValueAccessorChain {
 
     List<Object> valueAccessorChain = new ArrayList<Object>();
@@ -51,7 +51,7 @@ public class ValueAccessorChain {
     }
 
 
-    private final boolean isPossible(@NotNull Method[] methods, @NotNull Method method) {
+    private boolean isPossible(Method[] methods, Method method) {
         // unfortunately @NotNull isn't making it`s job
         if (null == method || null == methods) {
             throw new IllegalArgumentException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
