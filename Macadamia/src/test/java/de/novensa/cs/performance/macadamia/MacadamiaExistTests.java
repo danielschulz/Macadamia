@@ -1,6 +1,5 @@
 package de.novensa.cs.performance.macadamia;
 
-import junit.framework.TestCase;
 import org.junit.*;
 
 /**
@@ -8,8 +7,9 @@ import org.junit.*;
  *
  * @author Daniel Schulz
  */
-public class MacadamiaExistTests extends TestCase {
+public class MacadamiaExistTests {
 
+    @Test
     @Before
     public void testBefore() throws Exception {
     }
@@ -18,6 +18,7 @@ public class MacadamiaExistTests extends TestCase {
     public void testName() throws Exception {
     }
 
+    @Test
     @After
     public void testAfter() throws Exception {
     }
