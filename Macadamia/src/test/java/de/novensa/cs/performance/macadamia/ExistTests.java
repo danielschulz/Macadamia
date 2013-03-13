@@ -7,7 +7,7 @@ import org.junit.*;
  *
  * @author Daniel Schulz
  */
-public class MacadamiaExistTests {
+public class ExistTests {
 
     @Test
     @Before
