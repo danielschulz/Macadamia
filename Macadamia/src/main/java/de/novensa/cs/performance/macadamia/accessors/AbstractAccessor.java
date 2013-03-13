@@ -12,4 +12,7 @@ public interface AbstractAccessor<T> {
     public boolean contains(T obj);
 
     public boolean add(T obj, IndexType indexType);
+
+
+    public void updateIndex();
 }

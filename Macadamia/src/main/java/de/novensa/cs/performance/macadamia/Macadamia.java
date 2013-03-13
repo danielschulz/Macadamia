@@ -14,18 +14,30 @@ public class Macadamia<T> {
 
     private List<T> objects;
     private Collection<String> reflectiveAttributes;
-    private Map<IndexType, AbstractAccessor<T>> indexes = new TreeMap<IndexType, AbstractAccessor<T>>();
+    private Map<IndexType, AbstractAccessor<T>> indices;
 
+    public void updateIndices() {
+        for (AbstractAccessor accessor : this.indices.values()) {
+            accessor.updateIndex();
+        }
+    }
 
     /*
     Initialization
      */
     public Macadamia(List<T> objects, String... reflectiveAttributes) {
         this.objects = objects;
+        this.indices = new TreeMap<IndexType, AbstractAccessor<T>>();
     }
 
     public Macadamia(T... objects) {
         Collections.addAll(this.objects, objects);
+        this.indices = new TreeMap<IndexType, AbstractAccessor<T>>();
+    }
+
+    public Macadamia(String... reflectiveAttributes) {
+        Collections.addAll(this.reflectiveAttributes, reflectiveAttributes);
+        this.indices = new TreeMap<IndexType, AbstractAccessor<T>>();
     }
 
     public void setReflectiveAttributes(String... reflectiveAttributes) {
