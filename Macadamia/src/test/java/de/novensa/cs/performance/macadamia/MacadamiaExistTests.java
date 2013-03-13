@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 import org.junit.*;
 
 /**
- * The existing-within-index-tests are placed here.
+ * The existing-within-indexes-tests are placed here.
  *
  * @author Daniel Schulz
  */
