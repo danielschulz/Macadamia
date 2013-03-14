@@ -104,7 +104,6 @@ public class SharedClassCache {
         return CANNOT_BE_TOLD;
     }
 
-
     // override
     @Override
     public Object clone() throws CloneNotSupportedException {

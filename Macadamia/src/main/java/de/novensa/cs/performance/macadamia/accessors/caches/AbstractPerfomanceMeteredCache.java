@@ -4,7 +4,10 @@ import static de.novensa.cs.performance.macadamia.messaging.InfoMessages.getPerf
 
 /**
  * Defines the Cache´s basis by providing performance metrics.
+ *
+ * @author Daniel Schulz
  */
+@SuppressWarnings("UnusedDeclaration")
 public abstract class AbstractPerfomanceMeteredCache {
 
     long requestsAnsweredFromCache = 0L;
