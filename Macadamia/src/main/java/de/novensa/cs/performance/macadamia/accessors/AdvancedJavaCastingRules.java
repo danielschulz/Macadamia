@@ -22,7 +22,7 @@ public abstract class AdvancedJavaCastingRules {
                      ClassCastPredictionCache<Class, Class, ClassCastPrediction> classCastPrediction) {
 
         if (classCastPrediction.hasKey(from, to)) {
-            return classCastPrediction.getPrediction(from, to);
+            return classCastPrediction.get(from, to);
         } else {
             ClassCastPrediction result = isCastingPossibleByInheritance(from, to);
             classCastPrediction.add(from, to, result);

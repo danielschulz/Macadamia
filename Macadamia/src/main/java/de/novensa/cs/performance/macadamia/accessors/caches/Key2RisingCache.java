@@ -13,6 +13,8 @@ package de.novensa.cs.performance.macadamia.accessors.caches;
 
 public interface Key2RisingCache<R, F, V> {
 
+    public V get(R from, F to);
+
     public boolean hasKey(R roughKey, F fineKey);
 
     public void add(R roughKey, F fineKey, V value);

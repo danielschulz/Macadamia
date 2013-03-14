@@ -41,7 +41,7 @@ public class SharedClassCache {
         }
 
         ClassCastPrediction autoBoxingResult = classCastPredictionCache.hasKey(from, to) ?
-                classCastPredictionCache.getPrediction(from, to) : isAutoBoxingCastingPossible(from, to);
+                classCastPredictionCache.get(from, to) : isAutoBoxingCastingPossible(from, to);
         if (!CANNOT_BE_TOLD.equals(autoBoxingResult)) {
             // we have an answer
             classCastPredictionCache.add(from, to, autoBoxingResult);

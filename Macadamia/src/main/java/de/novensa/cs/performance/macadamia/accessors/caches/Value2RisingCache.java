@@ -16,4 +16,8 @@ public interface Value2RisingCache<K, V1, V2> {
     public boolean hasKey(K key);
 
     public void add(K key, V1 value1, V2 value2);
+
+    public V1 getValue1(K key);
+
+    public V2 getValue2(K key);
 }

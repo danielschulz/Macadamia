@@ -32,7 +32,7 @@ public class ClassCastPredictionCache<R, F, V> extends AbstractPerfomanceMetered
         return predAvailable;
     }
 
-    public V getPrediction(R from, F to) {
+    public V get(R from, F to) {
         Map<F, V> inBetween = this.cache.get(from);
         return null != inBetween ? inBetween.get(to) : null;
     }
