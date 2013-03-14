@@ -20,6 +20,7 @@ public class SharedClassCache {
 
     private static SharedClassCache master = null;
     protected Map<Class, LinkedHashSet<Method>> invokableMethodsCache = new HashMap<Class, LinkedHashSet<Method>>();
+    private ClassCastPredictionCache classCastPredictionCache = new ClassCastPredictionCache();
     // TODO: @Daniel: place in here an Apache LRU cache with some maximum size
 
 
@@ -50,6 +51,18 @@ public class SharedClassCache {
     }
 
     private ClassCastPrediction isAutoBoxingCastingPossible(Class from, Class to) {
+
+        if (classCastPredictionCache.hasPrediction(from, to)) {
+            return classCastPredictionCache.getPrediction(from, to);
+        } else {
+            ClassCastPrediction result = isAutoBoxingCastingPossibleExploreAndPutInCache(from, to);
+            classCastPredictionCache.add(from, to, result);
+            return result;
+        }
+    }
+
+
+    private ClassCastPrediction isAutoBoxingCastingPossibleExploreAndPutInCache(Class from, Class to) {
 
         // no cast will be performed because target state equals initial state
         if (from.equals(to)) {
