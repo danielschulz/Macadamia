@@ -2,7 +2,7 @@ package de.novensa.cs.performance.macadamia.accessors.caches;
 
 import de.novensa.cs.performance.macadamia.accessors.AdvancedJavaCastingRules;
 import de.novensa.cs.performance.macadamia.accessors.AutoBoxingMapping;
-import de.novensa.cs.performance.macadamia.util.ClassCastPrediction;
+import de.novensa.cs.performance.macadamia.util.strategic.ClassCastPrediction;
 import de.novensa.cs.performance.macadamia.util.Constants;
 
 import java.lang.reflect.Method;
@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 
-import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.*;
+import static de.novensa.cs.performance.macadamia.util.strategic.ClassCastPrediction.*;
 import static de.novensa.cs.performance.macadamia.messaging.ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE;
 
 /**
@@ -75,7 +75,8 @@ public class SharedClassCache {
         if (AutoBoxingMapping.isClassInIndex(from)) {
             // iff both are in indices do not allow possible isolation-violation
             // no cross-wise castings possible
-            if(AutoBoxingMapping.isClassInIndex(to) && AutoBoxingMapping.ISOLATED_SET.contains(from)) {
+            if(AutoBoxingMapping.isClassInIndex(to) &&
+                    (AutoBoxingMapping.ISOLATED_SET.contains(from) || AutoBoxingMapping.ISOLATED_SET.contains(to))) {
                 return // pick correct index
                         to.equals((from.isPrimitive() ?
                                 AutoBoxingMapping.FORWARD_TRIVIAL_INDEX :

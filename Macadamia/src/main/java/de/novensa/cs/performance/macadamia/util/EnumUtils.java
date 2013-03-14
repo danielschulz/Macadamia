@@ -1,5 +1,7 @@
 package de.novensa.cs.performance.macadamia.util;
 
+import de.novensa.cs.performance.macadamia.util.strategic.ClassCastPrediction;
+
 /**
  * Helps dealing with special enumerations from that productive code.
  *

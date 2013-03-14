@@ -1,15 +1,15 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
 import de.novensa.cs.performance.macadamia.accessors.caches.ClassCastPredictionCache;
-import de.novensa.cs.performance.macadamia.util.ClassCastPrediction;
+import de.novensa.cs.performance.macadamia.util.strategic.ClassCastPrediction;
 import de.novensa.cs.performance.macadamia.util.Constants;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
 
-import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.CANNOT_BE_TOLD;
-import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.IMPOSSIBLE;
-import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.POSSIBLE;
+import static de.novensa.cs.performance.macadamia.util.strategic.ClassCastPrediction.CANNOT_BE_TOLD;
+import static de.novensa.cs.performance.macadamia.util.strategic.ClassCastPrediction.IMPOSSIBLE;
+import static de.novensa.cs.performance.macadamia.util.strategic.ClassCastPrediction.POSSIBLE;
 
 /**
  * Use Java's inheritance techniques to make an prediction about the casting outcomes.

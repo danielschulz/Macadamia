@@ -2,7 +2,7 @@ package de.novensa.cs.performance.macadamia.accessors;
 
 import org.junit.Test;
 
-import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.*;
+import static de.novensa.cs.performance.macadamia.util.strategic.ClassCastPrediction.*;
 import static de.novensa.cs.performance.macadamia.util.Constants.OBJECT;
 import static de.novensa.cs.performance.macadamia.util.Constants.STRING;
 import static org.junit.Assert.assertEquals;
@@ -46,5 +46,10 @@ public class AutoBoxingMappingTest extends AutoBoxingTestObjects {
         assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(INST_BOOLEAN, INST_INTEGER));
         assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(PRIM_BOOLEAN, PRIM_INT));
         assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(PRIM_BOOLEAN, INST_INTEGER));
+
+        assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(PRIM_INT, INST_BOOLEAN));
+        assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(INST_INTEGER, INST_BOOLEAN));
+        assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(PRIM_INT, PRIM_BOOLEAN));
+        assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(INST_INTEGER, PRIM_BOOLEAN));
     }
 }

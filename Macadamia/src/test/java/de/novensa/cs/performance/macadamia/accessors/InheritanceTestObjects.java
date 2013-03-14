@@ -1,13 +1,13 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
-import de.novensa.cs.performance.macadamia.ExampleModels.Nationalities.American;
-import de.novensa.cs.performance.macadamia.ExampleModels.Nationalities.French;
-import de.novensa.cs.performance.macadamia.ExampleModels.Nature.*;
-import de.novensa.cs.performance.macadamia.ExampleModels.Personas.Homer;
-import de.novensa.cs.performance.macadamia.ExampleModels.Personas.Marge;
-import de.novensa.cs.performance.macadamia.ExampleModels.Personas.Peter;
-import de.novensa.cs.performance.macadamia.ExampleModels.Sexes.Female;
-import de.novensa.cs.performance.macadamia.ExampleModels.Sexes.Male;
+import de.novensa.cs.performance.macadamia.examplemodels.Nationalities.American;
+import de.novensa.cs.performance.macadamia.examplemodels.Nationalities.French;
+import de.novensa.cs.performance.macadamia.examplemodels.Nature.*;
+import de.novensa.cs.performance.macadamia.examplemodels.Personas.Homer;
+import de.novensa.cs.performance.macadamia.examplemodels.Personas.Marge;
+import de.novensa.cs.performance.macadamia.examplemodels.Personas.Peter;
+import de.novensa.cs.performance.macadamia.examplemodels.Sexes.Female;
+import de.novensa.cs.performance.macadamia.examplemodels.Sexes.Male;
 import de.novensa.cs.performance.macadamia.accessors.caches.SharedClassCache;
 
 /**
