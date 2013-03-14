@@ -29,14 +29,14 @@ public class ValueAccessorChain {
 
         Method[] methods = lastSimulatedMethodInvocationsResult.getMethods();
         // caching the possible Methods per Class
-        if (!sharedClassToMethodsCache.getCache().containsKey(lastSimulatedMethodInvocationsResult.getCanonicalName())) {
+        if (!sharedClassToMethodsCache.getCache().containsKey(lastSimulatedMethodInvocationsResult)) {
             LinkedHashSet<Method> brandNewSet = new LinkedHashSet<Method>();
             Collections.addAll(brandNewSet, methods);
-            sharedClassToMethodsCache.getCache().put(lastSimulatedMethodInvocationsResult.getCanonicalName(), brandNewSet);
+            sharedClassToMethodsCache.getCache().put(lastSimulatedMethodInvocationsResult, brandNewSet);
         }
 
         // is Method applicable?
-        if (!sharedClassToMethodsCache.getCache().get(lastSimulatedMethodInvocationsResult.getCanonicalName())
+        if (!sharedClassToMethodsCache.getCache().get(lastSimulatedMethodInvocationsResult)
                 .contains(method)) {
             throw new IllegalStateException(
                     ErrorMessages.getMethodNotInvokable(method, lastSimulatedMethodInvocationsResult));
