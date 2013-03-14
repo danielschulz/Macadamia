@@ -32,7 +32,7 @@ public class InheritanceCastingTest extends TestCase {
 
     private static final Class HUMAN = Human.class;
     private static final Class LIVING_THINGS = LivingThings.class;
-    private static final Class SPONTANOUS = Spontanous.class;
+    private static final Class SPONTANEOUS = Spontanous.class;
 
     private static final Class FEMALE = Female.class;
     private static final Class MALE = Male.class;
@@ -52,7 +52,7 @@ public class InheritanceCastingTest extends TestCase {
 
         assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, HUMAN));
         assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, LIVING_THINGS));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, SPONTANOUS));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, SPONTANEOUS));
 
         assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, FEMALE));
         assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, MALE));
@@ -61,7 +61,7 @@ public class InheritanceCastingTest extends TestCase {
         // Marge
         assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, HUMAN));
         assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, LIVING_THINGS));
-        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, SPONTANOUS));
+        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, SPONTANEOUS));
 
         assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, AMERICAN));
         assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, FRENCH));
@@ -70,10 +70,9 @@ public class InheritanceCastingTest extends TestCase {
         // Peter
         assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, HUMAN));
         assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, LIVING_THINGS));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, SPONTANOUS));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, SPONTANEOUS));
 
         assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, AMERICAN));
         assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, FRENCH));
-
     }
 }
