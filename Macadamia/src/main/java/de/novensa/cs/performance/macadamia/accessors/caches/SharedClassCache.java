@@ -21,7 +21,7 @@ import static de.novensa.cs.performance.macadamia.messaging.ErrorMessages.NULL_A
  */
 public class SharedClassCache {
 
-    private static SharedClassCache master = null;
+    private static SharedClassCache instance = null;
     protected Map<Class, LinkedHashSet<Method>> invokableMethodsCache = new HashMap<Class, LinkedHashSet<Method>>();
     private ClassCastPredictionCache<Class, Class, ClassCastPrediction> classCastPredictionCache =
             new ClassCastPredictionCache<Class, Class, ClassCastPrediction>(
@@ -114,11 +114,11 @@ public class SharedClassCache {
 
     // singleton
     public static synchronized SharedClassCache getInstance() {
-        if (null == master) {
-            master = new SharedClassCache();
+        if (null == instance) {
+            instance = new SharedClassCache();
         }
 
-        return master;
+        return instance;
     }
 
     private SharedClassCache() {
