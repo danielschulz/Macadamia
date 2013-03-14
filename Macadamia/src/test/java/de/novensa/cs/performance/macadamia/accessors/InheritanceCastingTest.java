@@ -1,4 +1,4 @@
-package de.novensa.cs.performance.macadamia;
+package de.novensa.cs.performance.macadamia.accessors;
 
 import org.junit.Test;
 

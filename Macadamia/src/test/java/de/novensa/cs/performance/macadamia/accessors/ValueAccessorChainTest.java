@@ -2,7 +2,6 @@ package de.novensa.cs.performance.macadamia.accessors;
 
 import de.novensa.cs.performance.macadamia.ExampleModels.Personas.Homer;
 import de.novensa.cs.performance.macadamia.ExampleModels.Personas.Peter;
-import de.novensa.cs.performance.macadamia.InheritanceTestObjects;
 import org.junit.Test;
 
 /**

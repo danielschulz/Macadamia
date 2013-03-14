@@ -40,7 +40,7 @@ public class SharedClassCache {
             return autoBoxingResult;
         } else {
             // if auto boxing cannot be sure enough go on using inheritance, implementation´s, and other techniques
-            return AdvancedJavaCastingRules.isCastingPossible(from, to);
+            return AdvancedJavaCastingRules.isCastingPossibleByInheritance(from, to);
         }
     }
 

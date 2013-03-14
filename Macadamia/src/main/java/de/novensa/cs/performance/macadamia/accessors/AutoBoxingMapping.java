@@ -11,7 +11,7 @@ import static de.novensa.cs.performance.macadamia.util.ErrorMessages.NULL_ARGUME
  * @author Daniel Schulz
  */
 @SuppressWarnings("UnusedDeclaration")
-public class AutoBoxingMapping {
+public abstract class AutoBoxingMapping {
 
     /**
      * Cast from Java Primitives to it's respective instances. Casts within all these cross-wise are possible iff it's
