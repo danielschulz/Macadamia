@@ -46,7 +46,9 @@ public class SharedClassCache {
             // no cross-wise castings possible
             if(AutoBoxingMapping.isClassInIndex(to) && AutoBoxingMapping.ISOLATED_SET.contains(from)) {
                 return // pick correct index
-                        to.equals((from.isPrimitive() ? AutoBoxingMapping.FORWARD_TRIVIAL_INDEX : AutoBoxingMapping.BACKWARD_TRIVIAL_INDEX).get(from)) ?
+                        to.equals((from.isPrimitive() ?
+                                AutoBoxingMapping.FORWARD_TRIVIAL_INDEX :
+                                AutoBoxingMapping.BACKWARD_TRIVIAL_INDEX).get(from)) ?
                                 // tell the prediction
                                 POSSIBLE : IMPOSSIBLE;
             }
@@ -55,7 +57,8 @@ public class SharedClassCache {
         }
 
 
-        Class result = from.isPrimitive() ? AutoBoxingMapping.FORWARD_TRIVIAL_INDEX.get(from) : AutoBoxingMapping.BACKWARD_TRIVIAL_INDEX.get(from);
+        Class result = from.isPrimitive() ?
+                AutoBoxingMapping.FORWARD_TRIVIAL_INDEX.get(from) : AutoBoxingMapping.BACKWARD_TRIVIAL_INDEX.get(from);
 
         // null == result: class is not present in it's index
         if (null == result) {
