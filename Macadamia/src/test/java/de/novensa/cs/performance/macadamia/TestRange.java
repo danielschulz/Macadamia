@@ -8,12 +8,15 @@ import java.lang.reflect.Method;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings({"UnusedDeclaration", "DefaultFileTemplate"})
 public class TestRange {
 
     public static void main(String[] args) {
-        TestRange range = new TestRange();
-        range.getClazz(String.class);
-        range.getMethods("java.lang.String");
+        System.out.println(getInt(null));
+    }
+
+    public static String getInt(String s) {
+        return s;
     }
 
     public void getClazz(Class clazz) {
@@ -29,7 +32,10 @@ public class TestRange {
         }
         System.out.println(c);
 
-        Method[] methods = c.getMethods();
+        Method[] methods = new Method[0];
+        if (c != null) {
+            methods = c.getMethods();
+        }
         for (Method m : methods) {
             System.out.println(m);
             if ("public int java.lang.String.codePointCount(int,int)".equals(m.toString())) {

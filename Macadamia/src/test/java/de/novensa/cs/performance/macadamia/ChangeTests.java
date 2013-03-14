@@ -22,6 +22,10 @@ public class ChangeTests {
         Pair<String, Boolean> willChange = new Pair<String, Boolean>("willChange", Boolean.FALSE);
 
         willChange.setAt1(Boolean.TRUE);
+
+        // java.beans.PropertyChangeListener propertyChangeListener = new PropertyChangeListenerProxy("willChange", changeListener);
+        willChange.setAt1(Boolean.TRUE);
+        System.out.println("success");
     }
 
     @Test

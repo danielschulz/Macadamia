@@ -15,6 +15,8 @@ public class ValueAccessorChain {
 
     List<Object> valueAccessorChain = new ArrayList<Object>();
     private SharedClassToMethodsCache sharedClassToMethodsCache = SharedClassToMethodsCache.getInstance();
+    private LinkedHashSet<Method> possibleMethodsByClass = new LinkedHashSet<Method>();
+
     final Class basicInstance;
     Class lastSimulatedMethodInvocationsResult;
 
@@ -26,11 +28,14 @@ public class ValueAccessorChain {
         Method[] methods = lastSimulatedMethodInvocationsResult.getMethods();
         // caching the possible Methods per Class
         if (!sharedClassToMethodsCache.getCache().containsKey(lastSimulatedMethodInvocationsResult.getCanonicalName())) {
-            sharedClassToMethodsCache.getCache().put(lastSimulatedMethodInvocationsResult.getCanonicalName(), methods);
+            LinkedHashSet<Method> brandNewSet = new LinkedHashSet<Method>();
+            Collections.addAll(brandNewSet, methods);
+            sharedClassToMethodsCache.getCache().put(lastSimulatedMethodInvocationsResult.getCanonicalName(), brandNewSet);
         }
 
         // is Method applicable?
-        if (!isPossible(sharedClassToMethodsCache.getCache().get(lastSimulatedMethodInvocationsResult.getCanonicalName()), method)) {
+        if (!sharedClassToMethodsCache.getCache().get(lastSimulatedMethodInvocationsResult.getCanonicalName())
+                .contains(method)) {
             throw new IllegalStateException(
                     ErrorMessages.getMethodNotInvokable(method, lastSimulatedMethodInvocationsResult));
         } else {
@@ -48,21 +53,6 @@ public class ValueAccessorChain {
     public void addUpcomingElement(Class clazz) {
         lastSimulatedMethodInvocationsResult = clazz;
         valueAccessorChain.add(clazz);
-    }
-
-
-    private boolean isPossible(Method[] methods, Method method) {
-        // unfortunately @NotNull isn't making it`s job
-        if (null == method || null == methods) {
-            throw new IllegalArgumentException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
-        }
-
-        for (Method m : methods) {
-            if (method.equals(m)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 
