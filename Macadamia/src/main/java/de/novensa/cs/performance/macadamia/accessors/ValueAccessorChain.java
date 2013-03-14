@@ -1,11 +1,11 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
-import de.novensa.cs.performance.macadamia.util.Constants;
 import de.novensa.cs.performance.macadamia.util.ErrorMessages;
-import org.javatuples.KeyValue;
 
 import java.lang.reflect.Method;
 import java.util.*;
+
+import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.IMPOSSIBLE;
 
 /**
  * Chain used to retrieve the values from call hierarchies.
@@ -16,7 +16,7 @@ import java.util.*;
 public class ValueAccessorChain {
 
     List<Object> valueAccessorChain = new ArrayList<Object>();
-    private SharedClassToMethodsCache sharedClassToMethodsCache = SharedClassToMethodsCache.getInstance();
+    private SharedClassCache sharedClassCache = SharedClassCache.getInstance();
     private LinkedHashSet<Method> possibleMethodsByClass = new LinkedHashSet<Method>();
 
     final Class basicInstance;
@@ -29,14 +29,14 @@ public class ValueAccessorChain {
 
         Method[] methods = lastSimulatedMethodInvocationsResult.getMethods();
         // caching the possible Methods per Class
-        if (!sharedClassToMethodsCache.getCache().containsKey(lastSimulatedMethodInvocationsResult)) {
+        if (!sharedClassCache.getCache().containsKey(lastSimulatedMethodInvocationsResult)) {
             LinkedHashSet<Method> brandNewSet = new LinkedHashSet<Method>();
             Collections.addAll(brandNewSet, methods);
-            sharedClassToMethodsCache.getCache().put(lastSimulatedMethodInvocationsResult, brandNewSet);
+            sharedClassCache.getCache().put(lastSimulatedMethodInvocationsResult, brandNewSet);
         }
 
         // is Method applicable?
-        if (!sharedClassToMethodsCache.getCache().get(lastSimulatedMethodInvocationsResult)
+        if (!sharedClassCache.getCache().get(lastSimulatedMethodInvocationsResult)
                 .contains(method)) {
             throw new IllegalStateException(
                     ErrorMessages.getMethodNotInvokable(method, lastSimulatedMethodInvocationsResult));
@@ -64,29 +64,15 @@ public class ValueAccessorChain {
         valueAccessorChain.add(clazz);
     }
 
-    private static boolean castingMaybePossible(Class from, Class to) {
+
+
+    private boolean castingMaybePossible(Class from, Class to) {
 
         if (null == from || null == to) {
             throw new IllegalStateException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
         }
 
-        // everything can be cast to Object iff to is no Primitive
-        if (Constants.OBJECT.equals(from) && !to.isPrimitive()) {
-            return true;
-        }
-
-
-        // auto-unboxing from objects to their primitives and vice-versa
-
-
-
-
-        // is the target class a generalized class? --> likely possible
-        // is the target class an implementation of this interface? --> likely possible
-
-
-
-        return true;
+        return !IMPOSSIBLE.equals(sharedClassCache.isCastPossibleInternal(from, to));
     }
 
 

@@ -9,9 +9,11 @@ import de.novensa.cs.performance.macadamia.ExampleModels.Personas.Peter;
 import de.novensa.cs.performance.macadamia.ExampleModels.Sexes.Female;
 import de.novensa.cs.performance.macadamia.ExampleModels.Sexes.Male;
 import de.novensa.cs.performance.macadamia.accessors.AutoBoxingMapping;
-import de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction;
 import junit.framework.TestCase;
 import org.junit.Test;
+
+import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.IMPOSSIBLE;
+import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.POSSIBLE;
 
 /**
  * Test Java´s advanced inheritances and interfaces.
@@ -20,6 +22,9 @@ import org.junit.Test;
  */
 @SuppressWarnings("JUnit4AnnotatedMethodInJUnit3TestCase")
 public class InheritanceCastingTest extends TestCase {
+
+
+    private AutoBoxingMapping autoBoxingMapping = new AutoBoxingMapping();
 
     // Personas
     private static final Class HOMER = (new Homer((short) 40)).getClass();
@@ -40,49 +45,47 @@ public class InheritanceCastingTest extends TestCase {
     private static final Class MALE = Male.class;
 
 
-
     @Test
     public void testInheritanceCastings() {
         // Homer
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, HOMER));
-        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, MARGE));
-        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, PETER));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(HOMER, HOMER));
+        assertEquals(IMPOSSIBLE, autoBoxingMapping.isCastingPossible(HOMER, MARGE));
+        assertEquals(IMPOSSIBLE, autoBoxingMapping.isCastingPossible(HOMER, PETER));
 
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(HOMER, AMERICAN));
+        assertEquals(IMPOSSIBLE, autoBoxingMapping.isCastingPossible(HOMER, FRENCH));
 
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, AMERICAN));
-        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, FRENCH));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(HOMER, HUMAN));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(HOMER, LIVING_THINGS));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(HOMER, SPONTANEOUS));
 
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, HUMAN));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, LIVING_THINGS));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, SPONTANEOUS));
-
-        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, FEMALE));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, MALE));
+        assertEquals(IMPOSSIBLE, autoBoxingMapping.isCastingPossible(HOMER, FEMALE));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(HOMER, MALE));
 
 
         // Marge
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, HUMAN));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, LIVING_THINGS));
-        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, SPONTANEOUS));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(MARGE, HUMAN));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(MARGE, LIVING_THINGS));
+        assertEquals(IMPOSSIBLE, autoBoxingMapping.isCastingPossible(MARGE, SPONTANEOUS));
 
-        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, AMERICAN));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, FRENCH));
+        assertEquals(IMPOSSIBLE, autoBoxingMapping.isCastingPossible(MARGE, AMERICAN));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(MARGE, FRENCH));
 
 
         // Peter
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, HUMAN));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, LIVING_THINGS));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, SPONTANEOUS));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(PETER, HUMAN));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(PETER, LIVING_THINGS));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(PETER, SPONTANEOUS));
 
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, AMERICAN));
-        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, FRENCH));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(PETER, AMERICAN));
+        assertEquals(IMPOSSIBLE, autoBoxingMapping.isCastingPossible(PETER, FRENCH));
 
 
         // tricky tasks
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, TOOL_BUILDER));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, THINGS));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, WORLD_ITEMS));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, WORLD_ITEMS));
-        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, WORLD_ITEMS));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(MARGE, TOOL_BUILDER));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(MARGE, THINGS));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(MARGE, WORLD_ITEMS));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(HOMER, WORLD_ITEMS));
+        assertEquals(POSSIBLE, autoBoxingMapping.isCastingPossible(PETER, WORLD_ITEMS));
     }
 }

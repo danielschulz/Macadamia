@@ -1,9 +1,10 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
-import de.novensa.cs.performance.macadamia.util.Constants;
 import de.novensa.cs.performance.macadamia.util.ErrorMessages;
 
 import java.util.*;
+
+import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.CANNOT_BE_TOLD;
 
 /**
  * Makes it easy to tell AutoBoxingMappings valid apart from others. By definition the forward translation is Primitive
@@ -20,18 +21,21 @@ public class AutoBoxingMapping {
      * class is not member of the isolated set (beneath). IsolatedSet-members are changeable on their trivial index
      * way only.
      */
-    private static final Map<Class, Class> FORWARD_TRIVIAL_INDEX = getForwardTrivialIndex();
+    public static final Map<Class, Class> FORWARD_TRIVIAL_INDEX = getForwardTrivialIndex();
 
     /**
      * The same as above: the only difference is the mapping from instances to it's respective Primitives.
      */
-    private static final Map<Class, Class> BACKWARD_TRIVIAL_INDEX = getBackwardTrivialIndex();
+    public static final Map<Class, Class> BACKWARD_TRIVIAL_INDEX = getBackwardTrivialIndex();
 
     /**
      * The isolated set contains classes that are not free changeable in cross-wise manner. Members of this set can be
      * cast in the index' mapping only.
      */
-    private static final LinkedHashSet<Class> ISOLATED_SET = getIsolatedSet();
+    public static final LinkedHashSet<Class> ISOLATED_SET = getIsolatedSet();
+
+    private SharedClassCache sharedClassCache = SharedClassCache.getInstance();
+
 
     public static boolean isClassInIndex(Class clazz) {
         if (null == clazz) {
@@ -41,62 +45,17 @@ public class AutoBoxingMapping {
         return clazz.isPrimitive() ? FORWARD_TRIVIAL_INDEX.containsKey(clazz) : BACKWARD_TRIVIAL_INDEX.containsKey(clazz);
     }
 
-    private static ClassCastPrediction isCastPossibleInternal(Class from, Class to) {
-
-        // no cast will be performed because target state equals initial state
-        if (from.equals(to)) {
-            return ClassCastPrediction.POSSIBLE;
-        }
-
-        // cast everything to Object is no problem
-        if (Constants.OBJECT.equals(to)) {
-            return ClassCastPrediction.POSSIBLE;
-        }
-
-        if (isClassInIndex(from)) {
-            // iff both are in indices do not allow possible isolation-violation
-            // no cross-wise castings possible
-            if(isClassInIndex(to) && ISOLATED_SET.contains(from)) {
-                return // pick correct index
-                        to.equals((from.isPrimitive() ? FORWARD_TRIVIAL_INDEX : BACKWARD_TRIVIAL_INDEX).get(from)) ?
-                                // tell the prediction
-                        ClassCastPrediction.POSSIBLE : ClassCastPrediction.IMPOSSIBLE;
-            }
-
-            return ClassCastPrediction.LIKELY_POSSIBLE;
-        }
 
 
-        Class result = from.isPrimitive() ? FORWARD_TRIVIAL_INDEX.get(from) : BACKWARD_TRIVIAL_INDEX.get(from);
-
-        // null == result: class is not present in it's index
-        if (null == result) {
-            return ClassCastPrediction.CANNOT_BE_TOLD;
-        }
-
-
-
-        if (to.equals(result)) {
-            /*if (!isCastingPossible(result, to).equals(ClassCastPrediction.IMPOSSIBLE)) {
-
-            }*/
-
-
-            return ClassCastPrediction.LIKELY_POSSIBLE;
-        }
-
-        return ClassCastPrediction.CANNOT_BE_TOLD;
-    }
-
-    public static ClassCastPrediction isCastingPossible(Class from, Class to) {
+    public ClassCastPrediction isCastingPossible(Class from, Class to) {
         if (null == from || null == to) {
             throw new IllegalArgumentException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
         }
 
-        ClassCastPrediction result = isCastPossibleInternal(from, to);
-        if (!ClassCastPrediction.CANNOT_BE_TOLD.equals(result)) {
+        ClassCastPrediction autoBoxingResult = sharedClassCache.isCastPossibleInternal(from, to);
+        if (!CANNOT_BE_TOLD.equals(autoBoxingResult)) {
             // we have an answer
-            return result;
+            return autoBoxingResult;
         } else {
             // if auto boxing cannot be sure enough go on using inheritance, implementation´s, and other techniques
             return AdvancedJavaCastingRules.isCastingPossible(from, to);

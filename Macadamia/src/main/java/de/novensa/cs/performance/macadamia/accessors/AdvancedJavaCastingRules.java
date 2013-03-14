@@ -1,7 +1,13 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
+import de.novensa.cs.performance.macadamia.util.Constants;
+
 import java.util.Collections;
 import java.util.LinkedHashSet;
+
+import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.CANNOT_BE_TOLD;
+import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.IMPOSSIBLE;
+import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.POSSIBLE;
 
 /**
  * Use Java's inheritance techniques to make an prediction about the casting outcomes.
@@ -28,7 +34,7 @@ public abstract class AdvancedJavaCastingRules {
             }
 
             if (to.equals(nextInInheritanceHierarchy)) {
-                result = ClassCastPrediction.POSSIBLE;
+                result = POSSIBLE;
             }
         } while (null != nextInInheritanceHierarchy);
 
@@ -37,14 +43,12 @@ public abstract class AdvancedJavaCastingRules {
             return result;
         }
 
+
         // is the target class an implementing interface?
-        for (Class cur : inheritedInterfaces) {
-            if (to.equals(cur)) {
-                return ClassCastPrediction.POSSIBLE;
-            }
+        if (Constants.OBJECT.equals(from) && !to.isPrimitive()) {
+            return CANNOT_BE_TOLD;
+        } else {
+            return inheritedInterfaces.contains(to) ? POSSIBLE : IMPOSSIBLE;
         }
-
-
-        return ClassCastPrediction.IMPOSSIBLE;
     }
 }

@@ -1,7 +1,5 @@
 package de.novensa.cs.performance.macadamia.util;
 
-import java.util.LinkedHashSet;
-
 /**
  * Central store for constants.
  *

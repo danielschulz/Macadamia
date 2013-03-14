@@ -11,11 +11,11 @@ import de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction;
 public class EnumUtils {
 
     public static ClassCastPrediction getPessimisticClassCastPrediction(ClassCastPrediction a, ClassCastPrediction b) {
-        return a.ordinal() > b.ordinal() ? b : a;
+        return a.ordinal() < b.ordinal() ? b : a;
     }
 
     public static ClassCastPrediction getOptimisticClassCastPrediction(ClassCastPrediction a, ClassCastPrediction b) {
-        return a.ordinal() > b.ordinal() ? a : b;
+        return a.ordinal() < b.ordinal() ? a : b;
     }
 
     public static int getAisBetterThanB(ClassCastPrediction a, ClassCastPrediction b) {

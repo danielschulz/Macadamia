@@ -1,7 +1,5 @@
 package de.novensa.cs.performance.macadamia;
 
-import de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
