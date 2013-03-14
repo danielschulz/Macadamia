@@ -1,6 +1,7 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
 import de.novensa.cs.performance.macadamia.util.Constants;
+import de.novensa.cs.performance.macadamia.util.ErrorMessages;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -28,6 +29,24 @@ public class SharedClassCache {
 
 
     // test casting possibilities
+
+
+
+
+    public ClassCastPrediction isCastingPossible(Class from, Class to) {
+        if (null == from || null == to) {
+            throw new IllegalArgumentException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
+        }
+
+        ClassCastPrediction autoBoxingResult = isCastPossibleInternal(from, to);
+        if (!CANNOT_BE_TOLD.equals(autoBoxingResult)) {
+            // we have an answer
+            return autoBoxingResult;
+        } else {
+            // if auto boxing cannot be sure enough go on using inheritance, implementation´s, and other techniques
+            return AdvancedJavaCastingRules.isCastingPossible(from, to);
+        }
+    }
 
     public ClassCastPrediction isCastPossibleInternal(Class from, Class to) {
 

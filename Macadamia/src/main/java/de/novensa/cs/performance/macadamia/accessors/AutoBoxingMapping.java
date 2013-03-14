@@ -1,10 +1,7 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
 import de.novensa.cs.performance.macadamia.util.ErrorMessages;
-
 import java.util.*;
-
-import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.CANNOT_BE_TOLD;
 
 /**
  * Makes it easy to tell AutoBoxingMappings valid apart from others. By definition the forward translation is Primitive
@@ -45,22 +42,6 @@ public class AutoBoxingMapping {
         return clazz.isPrimitive() ? FORWARD_TRIVIAL_INDEX.containsKey(clazz) : BACKWARD_TRIVIAL_INDEX.containsKey(clazz);
     }
 
-
-
-    public ClassCastPrediction isCastingPossible(Class from, Class to) {
-        if (null == from || null == to) {
-            throw new IllegalArgumentException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
-        }
-
-        ClassCastPrediction autoBoxingResult = sharedClassCache.isCastPossibleInternal(from, to);
-        if (!CANNOT_BE_TOLD.equals(autoBoxingResult)) {
-            // we have an answer
-            return autoBoxingResult;
-        } else {
-            // if auto boxing cannot be sure enough go on using inheritance, implementation´s, and other techniques
-            return AdvancedJavaCastingRules.isCastingPossible(from, to);
-        }
-    }
 
     /*
     private static void canTranslate(Map<Class, Set<Class>> index, Class from, Class... to) {
