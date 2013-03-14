@@ -1,5 +1,7 @@
 package de.novensa.cs.performance.macadamia;
 
+import de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -12,7 +14,6 @@ import java.lang.reflect.Method;
 public class TestRange {
 
     public static void main(String[] args) {
-
     }
 
     public void getMethods(String clazz) {

@@ -4,7 +4,9 @@ import de.novensa.cs.performance.macadamia.accessors.AutoBoxingMapping;
 import de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction;
 import junit.framework.TestCase;
 import org.junit.Test;
+
 import static de.novensa.cs.performance.macadamia.util.Constants.OBJECT;
+import static de.novensa.cs.performance.macadamia.util.Constants.STRING;
 
 /**
  * The test case for the auto boxing mapping.
@@ -21,27 +23,37 @@ public class AutoBoxingMappingTest extends TestCase {
     private static final Class INST_BOOLEAN = Boolean.class;
     private static final Class PRIM_BOOLEAN = boolean.class;
 
-    private static final Class STRING = String.class;
-
     @Test
     public static void testAutoBoxingMappings() {
 
         assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(STRING, STRING));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(STRING, OBJECT));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(OBJECT, OBJECT));
+        assertEquals(ClassCastPrediction.CANNOT_BE_TOLD, AutoBoxingMapping.isCastingPossible(OBJECT, STRING));
 
         assertEquals(ClassCastPrediction.LIKELY_POSSIBLE, AutoBoxingMapping.isCastingPossible(INST_INTEGER, PRIM_INT));
         assertEquals(ClassCastPrediction.LIKELY_POSSIBLE, AutoBoxingMapping.isCastingPossible(PRIM_INT, INST_INTEGER));
         assertEquals(ClassCastPrediction.LIKELY_POSSIBLE, AutoBoxingMapping.isCastingPossible(INST_FLOAT, PRIM_FLOAT));
         assertEquals(ClassCastPrediction.LIKELY_POSSIBLE, AutoBoxingMapping.isCastingPossible(PRIM_FLOAT, INST_FLOAT));
 
-        System.out.println(AutoBoxingMapping.isCastingPossible(INST_FLOAT, OBJECT));
-        System.out.println(AutoBoxingMapping.isCastingPossible(INST_INTEGER, OBJECT));
-        System.out.println(AutoBoxingMapping.isCastingPossible(PRIM_FLOAT, OBJECT));
-        System.out.println(AutoBoxingMapping.isCastingPossible(PRIM_INT, OBJECT));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(INST_FLOAT, OBJECT));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(INST_INTEGER, OBJECT));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PRIM_FLOAT, OBJECT));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PRIM_INT, OBJECT));
 
-        System.out.println(AutoBoxingMapping.isCastingPossible(INST_BOOLEAN, PRIM_BOOLEAN));
-        System.out.println(AutoBoxingMapping.isCastingPossible(PRIM_BOOLEAN, INST_BOOLEAN));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(INST_BOOLEAN, PRIM_BOOLEAN));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PRIM_BOOLEAN, INST_BOOLEAN));
 
-        System.out.println(AutoBoxingMapping.isCastingPossible(INST_BOOLEAN, INST_BOOLEAN));
-        System.out.println(AutoBoxingMapping.isCastingPossible(PRIM_BOOLEAN, PRIM_BOOLEAN));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(INST_BOOLEAN, INST_BOOLEAN));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PRIM_BOOLEAN, PRIM_BOOLEAN));
+
+        assertEquals(ClassCastPrediction.LIKELY_POSSIBLE, AutoBoxingMapping.isCastingPossible(INST_INTEGER, PRIM_FLOAT));
+        assertEquals(ClassCastPrediction.LIKELY_POSSIBLE, AutoBoxingMapping.isCastingPossible(INST_FLOAT, PRIM_INT));
+
+
+        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(INST_BOOLEAN, PRIM_INT));
+        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(INST_BOOLEAN, INST_INTEGER));
+        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(PRIM_BOOLEAN, PRIM_INT));
+        assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(PRIM_BOOLEAN, INST_INTEGER));
     }
 }

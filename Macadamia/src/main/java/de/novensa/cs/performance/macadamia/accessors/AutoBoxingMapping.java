@@ -1,5 +1,6 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
+import de.novensa.cs.performance.macadamia.util.Constants;
 import de.novensa.cs.performance.macadamia.util.ErrorMessages;
 
 import java.util.*;
@@ -47,13 +48,15 @@ public class AutoBoxingMapping {
             return ClassCastPrediction.POSSIBLE;
         }
 
-        // no cross-wise castings possible
-        if (ISOLATED_SET.contains(from)) {
-            return ClassCastPrediction.IMPOSSIBLE;
+        // cast everything to Object is no problem
+        if (Constants.OBJECT.equals(to)) {
+            return ClassCastPrediction.POSSIBLE;
         }
 
-        if (isClassInIndex(from) && isClassInIndex(to)) {
-            if (ISOLATED_SET.contains(from)) {
+        if (isClassInIndex(from)) {
+            // iff both are in indices do not allow possible isolation-violation
+            // no cross-wise castings possible
+            if(isClassInIndex(to) && ISOLATED_SET.contains(from)) {
                 return // pick correct index
                         to.equals((from.isPrimitive() ? FORWARD_TRIVIAL_INDEX : BACKWARD_TRIVIAL_INDEX).get(from)) ?
                                 // tell the prediction
@@ -91,11 +94,6 @@ public class AutoBoxingMapping {
         }
 
         return isCastPossibleInternal(from, to);
-
-        /*
-        if (isClassInIndex(from) && isClassInIndex(to) && !ISOLATED_SET.contains(from)) {
-            return ClassCastPrediction.LIKELY_POSSIBLE;
-        }*/
     }
 
     /*

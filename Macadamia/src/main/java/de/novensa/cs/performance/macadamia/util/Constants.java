@@ -1,6 +1,6 @@
 package de.novensa.cs.performance.macadamia.util;
 
-import java.lang.reflect.Method;
+import java.util.LinkedHashSet;
 
 /**
  * Central store for constants.
@@ -9,5 +9,6 @@ import java.lang.reflect.Method;
  */
 public class Constants {
 
-    public static final Class OBJECT = (new Object()).getClass();
+    public static final Class OBJECT = Object.class;
+    public static final Class STRING = String.class;
 }
