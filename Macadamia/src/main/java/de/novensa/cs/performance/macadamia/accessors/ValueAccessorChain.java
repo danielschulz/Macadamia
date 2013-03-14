@@ -1,6 +1,8 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
+import de.novensa.cs.performance.macadamia.util.Constants;
 import de.novensa.cs.performance.macadamia.util.ErrorMessages;
+import org.javatuples.KeyValue;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -51,8 +53,40 @@ public class ValueAccessorChain {
      * @param clazz The Class to cast to
      */
     public void addUpcomingElement(Class clazz) {
+
+        // make a basic test if casting will be possible here
+        if (!castingMaybePossible(lastSimulatedMethodInvocationsResult, clazz)) {
+            throw new IllegalStateException(
+                    ErrorMessages.getCastingMayCauseAnError(lastSimulatedMethodInvocationsResult, clazz));
+        }
+
         lastSimulatedMethodInvocationsResult = clazz;
         valueAccessorChain.add(clazz);
+    }
+
+    private static boolean castingMaybePossible(Class from, Class to) {
+
+        if (null == from || null == to) {
+            throw new IllegalStateException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
+        }
+
+        // everything can be cast to Object iff to is no Primitive
+        if (Constants.OBJECT.equals(from) && !to.isPrimitive()) {
+            return true;
+        }
+
+
+        // auto-unboxing from objects to their primitives and vice-versa
+
+
+
+
+        // is the target class a generalized class? --> likely possible
+        // is the target class an implementation of this interface? --> likely possible
+
+
+
+        return true;
     }
 
 

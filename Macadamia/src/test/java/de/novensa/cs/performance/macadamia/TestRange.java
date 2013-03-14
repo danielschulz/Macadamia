@@ -12,15 +12,7 @@ import java.lang.reflect.Method;
 public class TestRange {
 
     public static void main(String[] args) {
-        System.out.println(getInt(null));
-    }
 
-    public static String getInt(String s) {
-        return s;
-    }
-
-    public void getClazz(Class clazz) {
-        System.out.println(clazz);
     }
 
     public void getMethods(String clazz) {
