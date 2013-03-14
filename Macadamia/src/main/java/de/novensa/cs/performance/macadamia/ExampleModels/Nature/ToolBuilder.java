@@ -5,11 +5,7 @@ package de.novensa.cs.performance.macadamia.ExampleModels.Nature;
  *
  * @author Daniel Schulz
  */
-public abstract class LivingThings extends Things {
+public interface ToolBuilder {
 
-    public void go() {
-    }
-
-    public void shout() {
-    }
+    public void buildTool();
 }

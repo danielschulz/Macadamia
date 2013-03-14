@@ -2,9 +2,7 @@ package de.novensa.cs.performance.macadamia;
 
 import de.novensa.cs.performance.macadamia.ExampleModels.Nationalities.American;
 import de.novensa.cs.performance.macadamia.ExampleModels.Nationalities.French;
-import de.novensa.cs.performance.macadamia.ExampleModels.Nature.Human;
-import de.novensa.cs.performance.macadamia.ExampleModels.Nature.LivingThings;
-import de.novensa.cs.performance.macadamia.ExampleModels.Nature.Spontanous;
+import de.novensa.cs.performance.macadamia.ExampleModels.Nature.*;
 import de.novensa.cs.performance.macadamia.ExampleModels.Personas.Homer;
 import de.novensa.cs.performance.macadamia.ExampleModels.Personas.Marge;
 import de.novensa.cs.performance.macadamia.ExampleModels.Personas.Peter;
@@ -20,6 +18,7 @@ import org.junit.Test;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings("JUnit4AnnotatedMethodInJUnit3TestCase")
 public class InheritanceCastingTest extends TestCase {
 
     // Personas
@@ -33,6 +32,9 @@ public class InheritanceCastingTest extends TestCase {
     private static final Class HUMAN = Human.class;
     private static final Class LIVING_THINGS = LivingThings.class;
     private static final Class SPONTANEOUS = Spontanous.class;
+    private static final Class TOOL_BUILDER = ToolBuilder.class;
+    private static final Class THINGS = Things.class;
+    private static final Class WORLD_ITEMS = WorldItems.class;
 
     private static final Class FEMALE = Female.class;
     private static final Class MALE = Male.class;
@@ -74,5 +76,13 @@ public class InheritanceCastingTest extends TestCase {
 
         assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, AMERICAN));
         assertEquals(ClassCastPrediction.IMPOSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, FRENCH));
+
+
+        // tricky tasks
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, TOOL_BUILDER));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, THINGS));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(MARGE, WORLD_ITEMS));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(HOMER, WORLD_ITEMS));
+        assertEquals(ClassCastPrediction.POSSIBLE, AutoBoxingMapping.isCastingPossible(PETER, WORLD_ITEMS));
     }
 }
