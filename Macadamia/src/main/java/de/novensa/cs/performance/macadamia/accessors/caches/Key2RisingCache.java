@@ -7,13 +7,13 @@ package de.novensa.cs.performance.macadamia.accessors.caches;
  * @author Daniel Schulz
  *
  * @param <R> The instance type for the first mapping (row)
- * @param <S> The instance type for the next mapping (column)
- * @param <T> The outcome of the intersect of row (R) and column (S) and the type of the prediction
+ * @param <F> The instance type for the next mapping (column)
+ * @param <V> The outcome of the intersect of row (R) and column (F)
  */
 
-public interface Level2RisingCache<R, S, T> {
+public interface Key2RisingCache<R, F, V> {
 
-    public boolean hasPrediction(R from, S to);
+    public boolean hasKey(R roughKey, F fineKey);
 
-    public void add(R from, S to, T prediction);
+    public void add(R roughKey, F fineKey, V value);
 }

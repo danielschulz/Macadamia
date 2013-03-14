@@ -40,7 +40,7 @@ public class SharedClassCache {
             throw new IllegalArgumentException(NULL_ARGUMENTS_NOT_ALLOWED_HERE);
         }
 
-        ClassCastPrediction autoBoxingResult = classCastPredictionCache.hasPrediction(from, to) ?
+        ClassCastPrediction autoBoxingResult = classCastPredictionCache.hasKey(from, to) ?
                 classCastPredictionCache.getPrediction(from, to) : isAutoBoxingCastingPossible(from, to);
         if (!CANNOT_BE_TOLD.equals(autoBoxingResult)) {
             // we have an answer

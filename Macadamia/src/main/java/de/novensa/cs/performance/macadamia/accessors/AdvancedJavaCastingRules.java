@@ -21,7 +21,7 @@ public abstract class AdvancedJavaCastingRules {
     public static ClassCastPrediction isCastingPossibleByInheritance(Class from, Class to,
                      ClassCastPredictionCache<Class, Class, ClassCastPrediction> classCastPrediction) {
 
-        if (classCastPrediction.hasPrediction(from, to)) {
+        if (classCastPrediction.hasKey(from, to)) {
             return classCastPrediction.getPrediction(from, to);
         } else {
             ClassCastPrediction result = isCastingPossibleByInheritance(from, to);
