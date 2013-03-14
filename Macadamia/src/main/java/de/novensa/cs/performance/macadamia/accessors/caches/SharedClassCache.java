@@ -1,5 +1,8 @@
-package de.novensa.cs.performance.macadamia.accessors;
+package de.novensa.cs.performance.macadamia.accessors.caches;
 
+import de.novensa.cs.performance.macadamia.accessors.AdvancedJavaCastingRules;
+import de.novensa.cs.performance.macadamia.accessors.AutoBoxingMapping;
+import de.novensa.cs.performance.macadamia.util.ClassCastPrediction;
 import de.novensa.cs.performance.macadamia.util.Constants;
 
 import java.lang.reflect.Method;
@@ -7,8 +10,8 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 
-import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.*;
-import static de.novensa.cs.performance.macadamia.util.ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE;
+import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.*;
+import static de.novensa.cs.performance.macadamia.messaging.ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE;
 
 /**
  * The central cache for all ValueAccessorChains for all fields, for all instances, etc. This is possible and valid

@@ -1,4 +1,4 @@
-package de.novensa.cs.performance.macadamia.accessors;
+package de.novensa.cs.performance.macadamia.accessors.caches;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

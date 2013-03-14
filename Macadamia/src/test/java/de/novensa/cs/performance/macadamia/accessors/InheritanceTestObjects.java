@@ -8,6 +8,7 @@ import de.novensa.cs.performance.macadamia.ExampleModels.Personas.Marge;
 import de.novensa.cs.performance.macadamia.ExampleModels.Personas.Peter;
 import de.novensa.cs.performance.macadamia.ExampleModels.Sexes.Female;
 import de.novensa.cs.performance.macadamia.ExampleModels.Sexes.Male;
+import de.novensa.cs.performance.macadamia.accessors.caches.SharedClassCache;
 
 /**
  * The auto boxing objects to test onto.

@@ -1,5 +1,7 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
+import de.novensa.cs.performance.macadamia.accessors.caches.SharedClassCache;
+
 /**
  * The auto boxing objects to test onto.
  *

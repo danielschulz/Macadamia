@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-import static de.novensa.cs.performance.macadamia.util.ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE;
+import static de.novensa.cs.performance.macadamia.messaging.ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE;
 
 /**
  * A mapping from a method to a bunch of arguments to put in.

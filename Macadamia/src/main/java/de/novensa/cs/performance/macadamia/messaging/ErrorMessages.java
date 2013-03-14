@@ -1,4 +1,4 @@
-package de.novensa.cs.performance.macadamia.util;
+package de.novensa.cs.performance.macadamia.messaging;
 
 import java.lang.reflect.Method;
 

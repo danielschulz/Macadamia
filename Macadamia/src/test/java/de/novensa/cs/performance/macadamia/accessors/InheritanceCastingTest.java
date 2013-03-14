@@ -2,8 +2,8 @@ package de.novensa.cs.performance.macadamia.accessors;
 
 import org.junit.Test;
 
-import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.IMPOSSIBLE;
-import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.POSSIBLE;
+import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.IMPOSSIBLE;
+import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.POSSIBLE;
 import static junit.framework.TestCase.assertEquals;
 
 /**

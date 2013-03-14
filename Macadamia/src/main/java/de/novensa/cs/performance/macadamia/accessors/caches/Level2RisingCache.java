@@ -1,4 +1,4 @@
-package de.novensa.cs.performance.macadamia.accessors;
+package de.novensa.cs.performance.macadamia.accessors.caches;
 
 public interface Level2RisingCache<R, S, T> {
 

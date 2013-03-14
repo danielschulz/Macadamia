@@ -1,6 +1,6 @@
-package de.novensa.cs.performance.macadamia.accessors;
+package de.novensa.cs.performance.macadamia.accessors.caches;
 
-import static de.novensa.cs.performance.macadamia.util.InfoMessages.getPerformanceMetricsOutputClassToClassToPredictionCacheUsage;
+import static de.novensa.cs.performance.macadamia.messaging.InfoMessages.getPerformanceMetricsOutputClassToClassToPredictionCacheUsage;
 
 /**
  * Defines the Cache´s basis by providing performance metrics.

@@ -1,7 +1,9 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
+import de.novensa.cs.performance.macadamia.accessors.caches.SharedClassCache;
+
 import java.util.*;
-import static de.novensa.cs.performance.macadamia.util.ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE;
+import static de.novensa.cs.performance.macadamia.messaging.ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE;
 
 /**
  * Makes it easy to tell AutoBoxingMappings valid apart from others. By definition the forward translation is Primitive

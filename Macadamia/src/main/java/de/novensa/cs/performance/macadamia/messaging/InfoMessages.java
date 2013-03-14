@@ -1,4 +1,6 @@
-package de.novensa.cs.performance.macadamia.util;
+package de.novensa.cs.performance.macadamia.messaging;
+
+import de.novensa.cs.performance.macadamia.util.MathUtils;
 
 /**
  * Central store for informational messages of all kinds. They're internally separated by sectioning via comments.

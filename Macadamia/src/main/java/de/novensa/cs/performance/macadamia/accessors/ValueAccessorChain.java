@@ -1,11 +1,12 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
-import de.novensa.cs.performance.macadamia.util.ErrorMessages;
+import de.novensa.cs.performance.macadamia.accessors.caches.SharedClassCache;
+import de.novensa.cs.performance.macadamia.messaging.ErrorMessages;
 
 import java.lang.reflect.Method;
 import java.util.*;
 
-import static de.novensa.cs.performance.macadamia.util.ErrorMessages.NO_METHOD_CAN_BE_INVOKED_ON_A_PRIMITIVE_VALUE;
+import static de.novensa.cs.performance.macadamia.messaging.ErrorMessages.NO_METHOD_CAN_BE_INVOKED_ON_A_PRIMITIVE_VALUE;
 
 /**
  * Chain used to retrieve the values from call hierarchies.

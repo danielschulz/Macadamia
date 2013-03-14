@@ -1,13 +1,15 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
+import de.novensa.cs.performance.macadamia.accessors.caches.ClassCastPredictionCache;
+import de.novensa.cs.performance.macadamia.util.ClassCastPrediction;
 import de.novensa.cs.performance.macadamia.util.Constants;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
 
-import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.CANNOT_BE_TOLD;
-import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.IMPOSSIBLE;
-import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.POSSIBLE;
+import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.CANNOT_BE_TOLD;
+import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.IMPOSSIBLE;
+import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.POSSIBLE;
 
 /**
  * Use Java's inheritance techniques to make an prediction about the casting outcomes.
@@ -16,7 +18,7 @@ import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.
  */
 public abstract class AdvancedJavaCastingRules {
 
-    protected static ClassCastPrediction isCastingPossibleByInheritance(Class from, Class to,
+    public static ClassCastPrediction isCastingPossibleByInheritance(Class from, Class to,
                      ClassCastPredictionCache<Class, Class, ClassCastPrediction> classCastPrediction) {
 
         if (classCastPrediction.hasPrediction(from, to)) {

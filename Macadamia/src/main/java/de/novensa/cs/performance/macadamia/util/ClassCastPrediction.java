@@ -1,4 +1,4 @@
-package de.novensa.cs.performance.macadamia.accessors;
+package de.novensa.cs.performance.macadamia.util;
 
 /**
  * Tells how likely the casting will be possible. This will be an indicator but no exact prediction.
