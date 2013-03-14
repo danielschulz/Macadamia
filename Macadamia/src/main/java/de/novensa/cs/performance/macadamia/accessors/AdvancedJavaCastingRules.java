@@ -16,7 +16,18 @@ import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.
  */
 public abstract class AdvancedJavaCastingRules {
 
-    protected static ClassCastPrediction isCastingPossibleByInheritance(Class from, Class to) {
+    protected static ClassCastPrediction isCastingPossibleByInheritance(Class from, Class to,
+                                                                        ClassCastPredictionCache classCastPrediction) {
+        if (classCastPrediction.hasPrediction(from, to)) {
+            return classCastPrediction.getPrediction(from, to);
+        } else {
+            ClassCastPrediction result = isCastingPossibleByInheritance(from, to);
+            classCastPrediction.add(from, to, result);
+            return result;
+        }
+    }
+
+    private static ClassCastPrediction isCastingPossibleByInheritance(Class from, Class to) {
 
         ClassCastPrediction result = null;
 

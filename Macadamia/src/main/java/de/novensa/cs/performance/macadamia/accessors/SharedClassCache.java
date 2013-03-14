@@ -35,13 +35,18 @@ public class SharedClassCache {
             throw new IllegalArgumentException(NULL_ARGUMENTS_NOT_ALLOWED_HERE);
         }
 
-        ClassCastPrediction autoBoxingResult = isAutoBoxingCastingPossible(from, to);
+        ClassCastPrediction autoBoxingResult = classCastPredictionCache.hasPrediction(from, to) ?
+                classCastPredictionCache.getPrediction(from, to) : isAutoBoxingCastingPossible(from, to);
         if (!CANNOT_BE_TOLD.equals(autoBoxingResult)) {
             // we have an answer
+            classCastPredictionCache.add(from, to, autoBoxingResult);
             return autoBoxingResult;
         } else {
             // if auto boxing cannot be sure enough go on using inheritance, implementation´s, and other techniques
-            return AdvancedJavaCastingRules.isCastingPossibleByInheritance(from, to);
+            ClassCastPrediction predictionByInheritance =
+                    AdvancedJavaCastingRules.isCastingPossibleByInheritance(from, to, classCastPredictionCache);
+            classCastPredictionCache.add(from, to, predictionByInheritance);
+            return predictionByInheritance;
         }
     }
 
@@ -51,18 +56,6 @@ public class SharedClassCache {
     }
 
     private ClassCastPrediction isAutoBoxingCastingPossible(Class from, Class to) {
-
-        if (classCastPredictionCache.hasPrediction(from, to)) {
-            return classCastPredictionCache.getPrediction(from, to);
-        } else {
-            ClassCastPrediction result = isAutoBoxingCastingPossibleExploreAndPutInCache(from, to);
-            classCastPredictionCache.add(from, to, result);
-            return result;
-        }
-    }
-
-
-    private ClassCastPrediction isAutoBoxingCastingPossibleExploreAndPutInCache(Class from, Class to) {
 
         // no cast will be performed because target state equals initial state
         if (from.equals(to)) {
