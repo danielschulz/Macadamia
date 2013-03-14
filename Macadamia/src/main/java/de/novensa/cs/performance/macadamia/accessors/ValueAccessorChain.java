@@ -5,7 +5,7 @@ import de.novensa.cs.performance.macadamia.util.ErrorMessages;
 import java.lang.reflect.Method;
 import java.util.*;
 
-import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.IMPOSSIBLE;
+import static de.novensa.cs.performance.macadamia.util.ErrorMessages.NO_METHOD_CAN_BE_INVOKED_ON_A_PRIMITIVE_VALUE;
 
 /**
  * Chain used to retrieve the values from call hierarchies.
@@ -24,7 +24,7 @@ public class ValueAccessorChain {
 
     public void addUpcomingElement(Method method) {
         if(lastSimulatedMethodInvocationsResult.isPrimitive()) {
-            throw new IllegalStateException(ErrorMessages.NO_METHOD_CAN_BE_INVOKED_ON_A_PRIMITIVE_VALUE);
+            throw new IllegalStateException(NO_METHOD_CAN_BE_INVOKED_ON_A_PRIMITIVE_VALUE);
         }
 
         Method[] methods = lastSimulatedMethodInvocationsResult.getMethods();
@@ -67,12 +67,7 @@ public class ValueAccessorChain {
 
 
     private boolean castingMaybePossible(Class from, Class to) {
-
-        if (null == from || null == to) {
-            throw new IllegalStateException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
-        }
-
-        return !IMPOSSIBLE.equals(sharedClassCache.isCastPossibleInternal(from, to));
+        return sharedClassCache.isCastingPossibleBoolean(from, to);
     }
 
 

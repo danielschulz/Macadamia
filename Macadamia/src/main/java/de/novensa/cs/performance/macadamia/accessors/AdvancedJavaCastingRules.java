@@ -16,7 +16,7 @@ import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.
  */
 public abstract class AdvancedJavaCastingRules {
 
-    public static ClassCastPrediction isCastingPossible(Class from, Class to) {
+    static ClassCastPrediction isCastingPossible(Class from, Class to) {
 
         ClassCastPrediction result = null;
 

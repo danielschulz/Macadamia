@@ -7,6 +7,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
+import static de.novensa.cs.performance.macadamia.util.ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE;
+
 /**
  * A mapping from a method to a bunch of arguments to put in.
  *
@@ -42,7 +44,7 @@ public class ValueAccessorItem {
 
     public ValueAccessorItem(Method method, Collection<Object> arguments) {
         if (null == method || null == arguments) {
-            throw new IllegalArgumentException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
+            throw new IllegalArgumentException(NULL_ARGUMENTS_NOT_ALLOWED_HERE);
         }
 
         this.methodToArguments = new Pair<Method, Collection<Object>>(method, arguments);
@@ -51,7 +53,7 @@ public class ValueAccessorItem {
 
     public ValueAccessorItem(Class clazz) {
         if (null == clazz) {
-            throw new IllegalArgumentException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
+            throw new IllegalArgumentException(NULL_ARGUMENTS_NOT_ALLOWED_HERE);
         }
 
         this.methodToArguments = null;

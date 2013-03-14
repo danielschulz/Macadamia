@@ -1,7 +1,6 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
 import de.novensa.cs.performance.macadamia.util.Constants;
-import de.novensa.cs.performance.macadamia.util.ErrorMessages;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -9,6 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 
 import static de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction.*;
+import static de.novensa.cs.performance.macadamia.util.ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE;
 
 /**
  * The central cache for all ValueAccessorChains for all fields, for all instances, etc. This is possible and valid
@@ -29,16 +29,12 @@ public class SharedClassCache {
 
 
     // test casting possibilities
-
-
-
-
     public ClassCastPrediction isCastingPossible(Class from, Class to) {
         if (null == from || null == to) {
-            throw new IllegalArgumentException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
+            throw new IllegalArgumentException(NULL_ARGUMENTS_NOT_ALLOWED_HERE);
         }
 
-        ClassCastPrediction autoBoxingResult = isCastPossibleInternal(from, to);
+        ClassCastPrediction autoBoxingResult = isAutoBoxingCastingPossible(from, to);
         if (!CANNOT_BE_TOLD.equals(autoBoxingResult)) {
             // we have an answer
             return autoBoxingResult;
@@ -48,7 +44,12 @@ public class SharedClassCache {
         }
     }
 
-    public ClassCastPrediction isCastPossibleInternal(Class from, Class to) {
+    @SuppressWarnings("UnusedDeclaration")
+    public boolean isCastingPossibleBoolean(Class from, Class to) {
+        return !IMPOSSIBLE.equals(isCastingPossible(from, to));
+    }
+
+    private ClassCastPrediction isAutoBoxingCastingPossible(Class from, Class to) {
 
         // no cast will be performed because target state equals initial state
         if (from.equals(to)) {

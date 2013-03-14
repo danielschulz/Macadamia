@@ -22,7 +22,7 @@ public class ValueAccessorChainTest extends InheritanceTestObjects {
         chain.addUpcomingElement(c.getMethods()[1]);    // .toString()
     }
 
-    @Test
+    @Test(expected=IllegalStateException.class)
     public void testApplicableMthods2() {
         ValueAccessorChain chain = new ValueAccessorChain(Homer.class);
         chain.addUpcomingElement(Peter.class);

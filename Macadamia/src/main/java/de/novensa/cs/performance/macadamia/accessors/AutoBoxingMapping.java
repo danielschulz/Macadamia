@@ -1,7 +1,7 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
-import de.novensa.cs.performance.macadamia.util.ErrorMessages;
 import java.util.*;
+import static de.novensa.cs.performance.macadamia.util.ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE;
 
 /**
  * Makes it easy to tell AutoBoxingMappings valid apart from others. By definition the forward translation is Primitive
@@ -36,7 +36,7 @@ public class AutoBoxingMapping {
 
     public static boolean isClassInIndex(Class clazz) {
         if (null == clazz) {
-            throw new IllegalArgumentException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
+            throw new IllegalArgumentException(NULL_ARGUMENTS_NOT_ALLOWED_HERE);
         }
 
         return clazz.isPrimitive() ? FORWARD_TRIVIAL_INDEX.containsKey(clazz) : BACKWARD_TRIVIAL_INDEX.containsKey(clazz);
