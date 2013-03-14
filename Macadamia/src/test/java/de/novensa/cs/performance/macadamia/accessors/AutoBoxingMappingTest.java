@@ -1,6 +1,5 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import static de.novensa.cs.performance.macadamia.util.ClassCastPrediction.*;

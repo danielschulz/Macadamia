@@ -1,6 +1,6 @@
 package de.novensa.cs.performance.macadamia.accessors;
 
-import de.novensa.cs.performance.macadamia.IndexType;
+import de.novensa.cs.performance.macadamia.indexes.IndexType;
 
 /**
  * Access interface. This will define data CRUD techniques.
