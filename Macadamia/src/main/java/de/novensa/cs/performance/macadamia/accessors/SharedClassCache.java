@@ -20,7 +20,9 @@ public class SharedClassCache {
 
     private static SharedClassCache master = null;
     protected Map<Class, LinkedHashSet<Method>> invokableMethodsCache = new HashMap<Class, LinkedHashSet<Method>>();
-    private ClassCastPredictionCache classCastPredictionCache = new ClassCastPredictionCache();
+    private ClassCastPredictionCache<Class, Class, ClassCastPrediction> classCastPredictionCache =
+            new ClassCastPredictionCache<Class, Class, ClassCastPrediction>(
+                    Constants.INITIAL_SIZE_OF_CLASS_TO_CLASS_TO_PREDICTION_CACHE);
     // TODO: @Daniel: place in here an Apache LRU cache with some maximum size
 
 
