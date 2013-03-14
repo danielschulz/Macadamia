@@ -12,12 +12,11 @@ import static de.novensa.cs.performance.macadamia.util.ErrorMessages.NO_METHOD_C
  *
  * @author Daniel Schulz
  */
-@SuppressWarnings("UnusedDeclaration")
 public class ValueAccessorChain {
 
     List<Object> valueAccessorChain = new ArrayList<Object>();
-    private SharedClassCache sharedClassCache = SharedClassCache.getInstance();
-    private LinkedHashSet<Method> possibleMethodsByClass = new LinkedHashSet<Method>();
+    private final SharedClassCache sharedClassCache = SharedClassCache.getInstance();
+    private final Map<Class, LinkedHashSet<Method>> methodsCache = sharedClassCache.getCache();
 
     final Class basicInstance;
     Class lastSimulatedMethodInvocationsResult;
@@ -29,14 +28,14 @@ public class ValueAccessorChain {
 
         Method[] methods = lastSimulatedMethodInvocationsResult.getMethods();
         // caching the possible Methods per Class
-        if (!sharedClassCache.getCache().containsKey(lastSimulatedMethodInvocationsResult)) {
+        if (!methodsCache.containsKey(lastSimulatedMethodInvocationsResult)) {
             LinkedHashSet<Method> brandNewSet = new LinkedHashSet<Method>();
             Collections.addAll(brandNewSet, methods);
-            sharedClassCache.getCache().put(lastSimulatedMethodInvocationsResult, brandNewSet);
+            methodsCache.put(lastSimulatedMethodInvocationsResult, brandNewSet);
         }
 
         // is Method applicable?
-        if (!sharedClassCache.getCache().get(lastSimulatedMethodInvocationsResult)
+        if (!methodsCache.get(lastSimulatedMethodInvocationsResult)
                 .contains(method)) {
             throw new IllegalStateException(
                     ErrorMessages.getMethodNotInvokable(method, lastSimulatedMethodInvocationsResult));
@@ -73,10 +72,12 @@ public class ValueAccessorChain {
 
     // basic bean members
 
+    @SuppressWarnings("UnusedDeclaration")
     public List<Object> getElements() {
         return valueAccessorChain;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public Iterator<Object> getIterator() {
         return valueAccessorChain.iterator();
     }
