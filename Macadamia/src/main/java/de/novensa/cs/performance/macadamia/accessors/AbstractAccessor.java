@@ -7,6 +7,7 @@ import de.novensa.cs.performance.macadamia.IndexType;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings("UnusedDeclaration")
 public interface AbstractAccessor<T> {
 
     public boolean contains(T obj);

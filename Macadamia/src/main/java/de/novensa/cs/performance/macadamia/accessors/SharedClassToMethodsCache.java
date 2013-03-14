@@ -26,6 +26,7 @@ public class SharedClassToMethodsCache {
     // override
     @Override
     public Object clone() throws CloneNotSupportedException {
+        super.clone();
         throw new CloneNotSupportedException();
     }
 
