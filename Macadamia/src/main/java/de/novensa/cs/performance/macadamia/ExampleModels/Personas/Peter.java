@@ -11,6 +11,7 @@ import java.util.Locale;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings("UnusedDeclaration")
 public class Peter extends Male implements American, Spontanous {
 
     private final short iq;

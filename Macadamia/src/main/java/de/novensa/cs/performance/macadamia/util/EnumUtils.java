@@ -7,6 +7,7 @@ import de.novensa.cs.performance.macadamia.accessors.ClassCastPrediction;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings("UnusedDeclaration")
 public class EnumUtils {
 
     public static ClassCastPrediction getPessimisticClassCastPrediction(ClassCastPrediction a, ClassCastPrediction b) {

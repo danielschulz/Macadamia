@@ -5,6 +5,7 @@ package de.novensa.cs.performance.macadamia.ExampleModels.Nature;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings("UnusedDeclaration")
 public interface Spontanous {
 
     public void actStupid();

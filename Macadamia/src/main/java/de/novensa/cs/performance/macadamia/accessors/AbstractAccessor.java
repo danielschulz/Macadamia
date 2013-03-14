@@ -14,6 +14,5 @@ public interface AbstractAccessor<T> {
 
     public boolean add(T obj, IndexType indexType);
 
-
     public void updateIndex();
 }

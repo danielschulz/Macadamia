@@ -7,6 +7,7 @@ import java.util.Locale;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings("UnusedDeclaration")
 public interface American {
 
     public boolean singAnthem(Locale locale);

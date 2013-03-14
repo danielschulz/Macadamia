@@ -8,6 +8,7 @@ import de.novensa.cs.performance.macadamia.ExampleModels.Sexes.Female;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings("UnusedDeclaration")
 public class Marge extends Female implements French {
 
     private final short iq;

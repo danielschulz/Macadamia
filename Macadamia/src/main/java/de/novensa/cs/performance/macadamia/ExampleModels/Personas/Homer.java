@@ -11,6 +11,7 @@ import java.util.Locale;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings("UnusedDeclaration")
 public class Homer extends Male implements American, Spontanous {
 
     private final short iq;

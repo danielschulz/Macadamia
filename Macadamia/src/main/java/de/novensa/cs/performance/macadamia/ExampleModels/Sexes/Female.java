@@ -7,6 +7,7 @@ import de.novensa.cs.performance.macadamia.ExampleModels.Nature.Human;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings("UnusedDeclaration")
 public abstract class Female extends Human {
 
     public Female(String name, float high) {

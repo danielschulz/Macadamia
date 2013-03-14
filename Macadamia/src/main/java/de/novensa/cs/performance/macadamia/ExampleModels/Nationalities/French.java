@@ -7,6 +7,7 @@ import java.util.Locale;
  *
  * @author Daniel Schulz
  */
+@SuppressWarnings("UnusedDeclaration")
 public interface French {
 
     public static final Locale accent = Locale.FRENCH;

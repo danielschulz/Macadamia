@@ -38,12 +38,9 @@ public abstract class AdvancedJavaCastingRules {
         }
 
         // is the target class an implementing interface?
-
-        if (null != inheritedInterfaces) {
-            for (Class cur : inheritedInterfaces) {
-                if (to.equals(cur)) {
-                    return ClassCastPrediction.POSSIBLE;
-                }
+        for (Class cur : inheritedInterfaces) {
+            if (to.equals(cur)) {
+                return ClassCastPrediction.POSSIBLE;
             }
         }
 
