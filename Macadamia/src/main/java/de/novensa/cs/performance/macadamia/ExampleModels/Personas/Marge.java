@@ -1,6 +1,7 @@
 package de.novensa.cs.performance.macadamia.ExampleModels.Personas;
 
 import de.novensa.cs.performance.macadamia.ExampleModels.Nationalities.French;
+import de.novensa.cs.performance.macadamia.ExampleModels.Nature.Hedonist;
 import de.novensa.cs.performance.macadamia.ExampleModels.Sexes.Female;
 
 /**
@@ -9,7 +10,7 @@ import de.novensa.cs.performance.macadamia.ExampleModels.Sexes.Female;
  * @author Daniel Schulz
  */
 @SuppressWarnings("UnusedDeclaration")
-public class Marge extends Female implements French {
+public class Marge extends Female implements French, Hedonist {
 
     private final short iq;
 
@@ -25,5 +26,9 @@ public class Marge extends Female implements French {
     @Override
     public boolean consumeCulture() {
         return true;
+    }
+
+    @Override
+    public void enjoy() {
     }
 }

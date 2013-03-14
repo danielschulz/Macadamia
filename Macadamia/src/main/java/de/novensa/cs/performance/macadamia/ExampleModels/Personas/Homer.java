@@ -1,6 +1,7 @@
 package de.novensa.cs.performance.macadamia.ExampleModels.Personas;
 
 import de.novensa.cs.performance.macadamia.ExampleModels.Nationalities.American;
+import de.novensa.cs.performance.macadamia.ExampleModels.Nature.Hedonist;
 import de.novensa.cs.performance.macadamia.ExampleModels.Nature.Spontanous;
 import de.novensa.cs.performance.macadamia.ExampleModels.Sexes.Male;
 
@@ -12,7 +13,7 @@ import java.util.Locale;
  * @author Daniel Schulz
  */
 @SuppressWarnings("UnusedDeclaration")
-public class Homer extends Male implements American, Spontanous {
+public class Homer extends Male implements American, Spontanous, Hedonist {
 
     private final short iq;
 
@@ -33,5 +34,9 @@ public class Homer extends Male implements American, Spontanous {
     @Override
     public void actStupid() {
         throw new IllegalStateException();
+    }
+
+    @Override
+    public void enjoy() {
     }
 }
