@@ -93,7 +93,14 @@ public class AutoBoxingMapping {
             throw new IllegalArgumentException(ErrorMessages.NULL_ARGUMENTS_NOT_ALLOWED_HERE);
         }
 
-        return isCastPossibleInternal(from, to);
+        ClassCastPrediction result = isCastPossibleInternal(from, to);
+        if (!ClassCastPrediction.CANNOT_BE_TOLD.equals(result)) {
+            // we have an answer
+            return result;
+        } else {
+            // if auto boxing cannot be sure enough go on using inheritance, implementation´s, and other techniques
+            return AdvancedJavaCastingRules.isCastingPossible(from, to);
+        }
     }
 
     /*
