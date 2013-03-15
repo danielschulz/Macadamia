@@ -49,6 +49,16 @@ public class InheritanceCastingTest extends InheritanceTestObjects {
         assertEquals(POSSIBLE, sharedClassCache.isCastingPossible(PETER, AMERICAN));
         assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(PETER, FRENCH));
 
+        // Hedonist´s
+        assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(HEDONIST, HOMER));
+        assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(HEDONIST, MARGE));
+        assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(HEDONIST, PETER));
+        assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(HEDONIST, SPONTANEOUS));
+        assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(HEDONIST, AMERICAN));
+        assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(HEDONIST, LIVING_THINGS));
+        assertEquals(IMPOSSIBLE, sharedClassCache.isCastingPossible(HEDONIST, TOOL_BUILDER));
+
+
 
         // tricky tasks
         assertEquals(POSSIBLE, sharedClassCache.isCastingPossible(MARGE, TOOL_BUILDER));

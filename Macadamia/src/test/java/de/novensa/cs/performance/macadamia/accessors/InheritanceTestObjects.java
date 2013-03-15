@@ -34,6 +34,7 @@ public abstract class InheritanceTestObjects {
     static final Class TOOL_BUILDER = ToolBuilder.class;
     static final Class THINGS = Things.class;
     static final Class WORLD_ITEMS = WorldItems.class;
+    static final Class HEDONIST = Hedonist.class;
 
     static final Class FEMALE = Female.class;
     static final Class MALE = Male.class;
