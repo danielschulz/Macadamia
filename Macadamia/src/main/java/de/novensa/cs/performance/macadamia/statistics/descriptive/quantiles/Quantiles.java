@@ -39,6 +39,7 @@ public class Quantiles<K,V extends ConcreteNumber> {
             return null;
         }
 
+        //noinspection unchecked,SuspiciousToArrayCall
         final V[] vs = (V[]) values.toArray(new ConcreteNumber[values.size()]);
         V min = vs[0];
         V max = vs[0];
@@ -52,6 +53,6 @@ public class Quantiles<K,V extends ConcreteNumber> {
             }
         }
 
-        return new Pair(min, max);
+        return new Pair<V, V>(min, max);
     }
 }

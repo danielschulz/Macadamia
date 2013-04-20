@@ -17,33 +17,38 @@ public class ConcreteNumber<N extends Number> extends Number {
     public ConcreteNumber(final Number number) {
         this.number = number;
     }
+    
+    public int compareTo(N anotherNumber) {
+        return compareTo(this.number, anotherNumber);
+    }
 
     // comparison logic
-    public int compareTo(N anotherNumber) {
+    @SuppressWarnings("FinalStaticMethod")
+    public static final <N extends Number> int compareTo(final N oneNumber, final N anotherNumber) {
 
-        if (this.number instanceof Long) {
-            return (this.number.longValue() < anotherNumber.longValue()) ?
-                    -1 : ((this.number.longValue() == anotherNumber.longValue()) ? 0 : 1);
+        if (oneNumber instanceof Long) {
+            return (oneNumber.longValue() < anotherNumber.longValue()) ?
+                    -1 : ((oneNumber.longValue() == anotherNumber.longValue()) ? 0 : 1);
 
-        } else if (this.number instanceof Integer) {
-            return (this.number.intValue() < anotherNumber.intValue()) ?
-                    -1 : ((this.number.intValue() == anotherNumber.intValue()) ? 0 : 1);
+        } else if (oneNumber instanceof Integer) {
+            return (oneNumber.intValue() < anotherNumber.intValue()) ?
+                    -1 : ((oneNumber.intValue() == anotherNumber.intValue()) ? 0 : 1);
 
-        } else if (this.number instanceof Float) {
-            return (this.number.floatValue() < anotherNumber.floatValue()) ?
-                    -1 : ((this.number.floatValue() == anotherNumber.floatValue()) ? 0 : 1);
+        } else if (oneNumber instanceof Float) {
+            return (oneNumber.floatValue() < anotherNumber.floatValue()) ?
+                    -1 : ((oneNumber.floatValue() == anotherNumber.floatValue()) ? 0 : 1);
 
-        } else if (this.number instanceof Double) {
-            return (this.number.doubleValue() < anotherNumber.doubleValue()) ?
-                    -1 : ((this.number.doubleValue() == anotherNumber.doubleValue()) ? 0 : 1);
+        } else if (oneNumber instanceof Double) {
+            return (oneNumber.doubleValue() < anotherNumber.doubleValue()) ?
+                    -1 : ((oneNumber.doubleValue() == anotherNumber.doubleValue()) ? 0 : 1);
 
-        } else if (this.number instanceof Short) {
-            return (this.number.shortValue() < anotherNumber.shortValue()) ?
-                    -1 : ((this.number.shortValue() == anotherNumber.shortValue()) ? 0 : 1);
+        } else if (oneNumber instanceof Short) {
+            return (oneNumber.shortValue() < anotherNumber.shortValue()) ?
+                    -1 : ((oneNumber.shortValue() == anotherNumber.shortValue()) ? 0 : 1);
 
-        } else if (this.number instanceof Byte) {
-            return (this.number.byteValue() < anotherNumber.byteValue()) ?
-                    -1 : ((this.number.byteValue() == anotherNumber.byteValue()) ? 0 : 1);
+        } else if (oneNumber instanceof Byte) {
+            return (oneNumber.byteValue() < anotherNumber.byteValue()) ?
+                    -1 : ((oneNumber.byteValue() == anotherNumber.byteValue()) ? 0 : 1);
         }
 
         throw new IllegalStateException(ErrorMessages.COMPARISON_WAS_NOT_POSSIBLE);

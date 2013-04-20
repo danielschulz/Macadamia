@@ -11,6 +11,7 @@ import org.junit.Test;
  */
 public class QuantilesTest extends QuantilesMasterTestCase {
 
+    @SuppressWarnings("JUnit4AnnotatedMethodInJUnit3TestCase")
     @Test
     public void testMinMaxValues() throws Exception {
         // init
