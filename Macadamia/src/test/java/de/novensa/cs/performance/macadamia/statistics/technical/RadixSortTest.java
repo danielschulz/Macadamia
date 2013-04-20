@@ -10,6 +10,9 @@ public class RadixSortTest extends MasterSortTestCase {
 
     public void testRadixSorting() throws Exception {
 
+        // tests
+        assertFalse(isSorted(getUnsorted()));
         assertTrue(isSorted(getSorted()));
+        assertTrue(isSorted(RadixSort.sortRadix(getUnsortedPositives())));
     }
 }

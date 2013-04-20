@@ -14,40 +14,23 @@ import java.util.List;
 public abstract class MasterSortTestCase extends TestCase {
 
     private static List<Integer> UNSORTED = new ArrayList<Integer>(32);
-    private static List<Integer> SORTED = new ArrayList<Integer>(UNSORTED.size());
+    private static List<Integer> UNSORTED_POSITIVES = new ArrayList<Integer>(32);
     static {
-        // unsorted
-        UNSORTED.add(32);
-        UNSORTED.add(-5);
-        UNSORTED.add(1122);
-
-        UNSORTED.add(-12);
-        UNSORTED.add(44);
-        UNSORTED.add(8756);
-
-        UNSORTED.add(-32);
-        UNSORTED.add(102);
-        UNSORTED.add(42);
-
-        UNSORTED.add(5645613);
-        UNSORTED.add(-56532328);
-        UNSORTED.add(0);
-
-        UNSORTED.add(42);
-        UNSORTED.add(-102);
-        UNSORTED.add(56532328);
-
-
-        // sorted
-        SORTED.addAll(UNSORTED);
+        UNSORTED.addAll(Arrays.asList(
+                32, -5, 1122, -12, 44, 8756, -32, 102, 42, 56613, -5658, 0, 42, -102, 56528));
+        UNSORTED_POSITIVES.addAll(Arrays.asList(
+                32, 5, 1122, 12, 44, 8756, 32, 102, 42, 56613, 5658, 0, 42, 102, 56528));
     }
 
     // technical logic
-    public static final <V extends Comparable> boolean isSorted(final List<V> values) {
+    public static final boolean isSorted(final List<Integer> values) {
 
-        int i = -1;
-        for (V v : values) {
-            if (0 < v.compareTo(values.get(++i))) {
+        int a,b;
+        for (int i = 0; i < values.size() - 1; i++) {
+
+            a = values.get(i);
+            b = values.get(i + 1);
+            if (a > b){
                 return false;
             }
         }
@@ -66,6 +49,18 @@ public abstract class MasterSortTestCase extends TestCase {
         Arrays.sort(sorted);
         return Arrays.asList(sorted);
     }
+
+    public static final List<Integer> getUnsortedPositives() {
+        return UNSORTED_POSITIVES;
+    }
+
+    public static final List<Integer> getSortedPositives() {
+        Integer[] sorted = UNSORTED_POSITIVES.toArray(new Integer[UNSORTED_POSITIVES.size()]);
+        Arrays.sort(sorted);
+        return Arrays.asList(sorted);
+    }
+
+
 
 
     // default test case
