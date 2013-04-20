@@ -38,7 +38,7 @@ public class Quantiles<K,V extends ConcreteNumber> {
 
 
     // technical logic
-    public static <V extends ConcreteNumber> Triplet<V, Double, V> getMinAverageMaxValue(final Collection<V> values) {
+    public static <V extends Number> Triplet<V, Double, V> getMinAverageMaxValue(final Collection<V> values) {
         if (null == values || 0 == values.size()) {
             return null;
         }

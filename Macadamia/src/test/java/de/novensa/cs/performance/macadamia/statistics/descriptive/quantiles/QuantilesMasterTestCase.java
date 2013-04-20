@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Daniel Schulz
  */
-public class QuantilesMasterTestCase extends TestCase {
+public abstract class QuantilesMasterTestCase extends TestCase {
 
     public static final Long MIN = -10L;
     public static final Long MAX = 1000L;
