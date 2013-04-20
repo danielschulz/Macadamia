@@ -1,9 +1,11 @@
 package de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles;
 
 import de.novensa.cs.performance.macadamia.statistics.technical.ConcreteNumber;
+import de.novensa.cs.performance.macadamia.statistics.technical.RadixSort;
 import org.javatuples.Triplet;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Quantiles represent an n-quantile from keys and values. If there are no keys then keys and values are the same.
@@ -13,15 +15,16 @@ import java.util.Collection;
 public class Quantiles<K,V extends ConcreteNumber> {
 
     // member fields
-    private final int breakPointCount;
-    private /*final*/ Triplet<V, Double, V> minAverageMax;
-    private /*final*/ V median;
-    private final Collection<K> keys;
-    private final Collection<V> values;
+    private int breakPointCount;
+    private Triplet<V, Double, V> minAverageMax;
+    private Double squaredDeviation;
+    private V median;
+    private List<K> keys;
+    private List<V> values;
 
 
     // constructor
-    protected Quantiles(final Collection<K> keys, final Collection<V> values, final int breakPointCount) {
+    protected Quantiles(final List<K> keys, final List<V> values, final int breakPointCount) {
         this.breakPointCount = breakPointCount;
         this.keys = keys;
         this.values = values;
@@ -30,10 +33,16 @@ public class Quantiles<K,V extends ConcreteNumber> {
         this.minAverageMax = getMinAverageMaxValue(values);
 
         // sort values
+        RadixSort.sort(this.values);
 
         // get quantiles
 
-        // get median
+        // get median and set squared deviation
+    }
+
+
+    private boolean valueListIsRadixSortCompatible() {
+        return false;
     }
 
 
@@ -97,5 +106,9 @@ public class Quantiles<K,V extends ConcreteNumber> {
 
     public Collection<V> getValues() {
         return values;
+    }
+
+    public Double getSquaredDeviation() {
+        return squaredDeviation;
     }
 }

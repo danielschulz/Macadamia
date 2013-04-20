@@ -7,7 +7,7 @@ import de.novensa.cs.performance.macadamia.messaging.ErrorMessages;
  *
  * @author Daniel Schulz
  */
-public class ConcreteNumber<N extends Number> extends Number {
+public class ConcreteNumber<N extends Number> extends Number implements Comparable<N> {
 
     // member
     private final Number number;
@@ -19,6 +19,7 @@ public class ConcreteNumber<N extends Number> extends Number {
     }
     
     @SuppressWarnings("UnusedDeclaration")
+    @Override
     public int compareTo(N anotherNumber) {
         return compareTo(this.number, anotherNumber);
     }

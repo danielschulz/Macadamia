@@ -17,17 +17,27 @@ public class RadixSort {
     private final static int DECIMAL_MAPPING_COUNT = 10;
     private final static int EVERY_MAPPINGS_SIZE_DENOMINATOR = 3;
 
+
+    public static <N extends Number> List<N> sort(final List<N> value) {
+        /*if (isRadixSortApplicable(value)) {
+            return sortInternal(value);
+        } else {
+
+        }*/
+        return sortInternal(value);
+    }
+
     /**
      * Sorts the given list with radix sort. This can be applied to lists of positive integer value only.
      *
      * @param value The list of unsorted values
      * @return The radix sorted value list
      */
-    public static List<Integer> sort(final List<Integer> value) {
+    private static <N extends Number> List<N> sortInternal(final List<N> value) {
 
         // init
-        ArrayList<Integer> result = new ArrayList<Integer>(value);
-        final int max = Quantiles.getMinAverageMaxValue(value).getValue2();
+        ArrayList<Integer> result = new ArrayList<Integer>((List<Integer>) value);
+        final int max = (Integer) Quantiles.getMinAverageMaxValue(value).getValue2();
 
         ArrayList<ArrayList<Integer>> radixMapping = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < DECIMAL_MAPPING_COUNT; i++) {
@@ -73,6 +83,6 @@ public class RadixSort {
         }
 
 
-        return result;
+        return (List<N>) result;
     }
 }
