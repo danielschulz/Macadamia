@@ -1,5 +1,7 @@
 package de.novensa.cs.performance.macadamia.statistics.technical;
 
+import de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles.Quantiles;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,54 +17,47 @@ public class RadixSort {
     private final static int DECIMAL_MAPPING_COUNT = 10;
 
     public static <V extends Integer /*Number*/> List<Integer> sortRadix(List<Integer> numbers) {
-        ArrayList<Integer> localNumbers = new ArrayList<Integer>();
 
-        Integer maxValue = -99999999;
-        for (Integer nr : numbers){
-            localNumbers.add(nr);
-            if (nr > maxValue){
-                maxValue = nr;
-            }
-        }
+        ArrayList<Integer> localNumbers = new ArrayList<Integer>(numbers.size());
+        final int max = Quantiles.getMinAverageMaxValue(numbers).getValue2();
 
-        ArrayList<ArrayList<Integer>> bin = new ArrayList<ArrayList<Integer>>();
-        for(int i=0; i < DECIMAL_MAPPING_COUNT; i++){
+        ArrayList<ArrayList<Integer>> radixMapping = new ArrayList<ArrayList<Integer>>();
+        for (int i = 0; i < DECIMAL_MAPPING_COUNT; i++) {
             ArrayList<Integer> myList = new ArrayList<Integer>();
-            bin.add(myList);
+            radixMapping.add(myList);
         }
 
-        Integer pwr10 = 1;
-        while (pwr10 < maxValue){
-            Iterator myIter = localNumbers.iterator();
-            while (myIter.hasNext()){
-                Integer nr = (Integer)myIter.next();
-                if (nr < pwr10)
-                {
-                    bin.get(0).add(nr);
-                }
-                else
-                {
-                    Integer help = nr / pwr10;
+        Integer power = 1;
+        Iterator<Integer> iterator;
+
+        while (power < max) {
+            iterator = localNumbers.iterator();
+            while (iterator.hasNext()) {
+                Integer nr = (Integer) iterator.next();
+                if (nr < power) {
+                    radixMapping.get(0).add(nr);
+                } else {
+                    Integer help = nr / power;
                     Integer pos = help % DECIMAL_MAPPING_COUNT;
-                    bin.get(pos).add(nr);
+                    radixMapping.get(pos).add(nr);
                 }
             }
 
             localNumbers.clear();
-            for (int i = 0; i < DECIMAL_MAPPING_COUNT; i++){
-                ArrayList<Integer> myList = bin.get(i);
-                for (int j = 0; j < myList.size(); j++){
+            for (int i = 0; i < DECIMAL_MAPPING_COUNT; i++) {
+                ArrayList<Integer> myList = radixMapping.get(i);
+                for (int j = 0; j < myList.size(); j++) {
                     localNumbers.add(myList.get(j));
                 }
-                bin.get(i).clear();
+                radixMapping.get(i).clear();
             }
 
-            pwr10 = DECIMAL_MAPPING_COUNT * pwr10;
+            power = DECIMAL_MAPPING_COUNT * power;
         }
 
 
         numbers.clear();
-        for (Integer nr : localNumbers){
+        for (Integer nr : localNumbers) {
             numbers.add(nr);
         }
 
