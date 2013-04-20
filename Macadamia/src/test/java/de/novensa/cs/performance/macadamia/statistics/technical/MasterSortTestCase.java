@@ -23,6 +23,7 @@ public abstract class MasterSortTestCase extends TestCase {
     }
 
     // technical logic
+    @SuppressWarnings("FinalStaticMethod")
     public static final boolean isSorted(final List<Integer> values) {
 
         int a,b;
@@ -102,8 +103,9 @@ public abstract class MasterSortTestCase extends TestCase {
         assert a != b;
         assert a.size() == b.size();
 
+        int i = 0;
         for (V item : a) {
-            if (!a.equals(b)) {
+            if (!item.equals(b.get(i++))) {
                 return false;
             }
         }
