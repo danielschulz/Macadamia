@@ -15,7 +15,7 @@ public class QuantilesTest extends QuantilesMasterTestCase {
     @Test
     public void testMinMaxValues() throws Exception {
         // init
-        Pair<ConcreteNumber<Long>, ConcreteNumber<Long>> minMax = Quantiles.getMinMaxValue(VALUE_LIST);
+        Pair<ConcreteNumber<Long>, ConcreteNumber<Long>> minMax = Quantiles.getMinAverageMaxValue(VALUE_LIST);
 
         Long min = minMax.getValue0().longValue();
         Long max = minMax.getValue1().longValue();

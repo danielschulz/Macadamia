@@ -1,7 +1,7 @@
 package de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles;
 
 import de.novensa.cs.performance.macadamia.statistics.technical.ConcreteNumber;
-import org.javatuples.Pair;
+import org.javatuples.Triplet;
 
 import java.util.Collection;
 
@@ -14,27 +14,31 @@ public class Quantiles<K,V extends ConcreteNumber> {
 
     // member fields
     private final int breakPointCount;
-    private /*final*/ Pair<V, V> minMaxValue;
+    private /*final*/ Triplet<V, Double, V> minAverageMax;
     private /*final*/ V median;
-    private /*final*/ V average;
+    private final Collection<K> keys;
+    private final Collection<V> values;
 
 
-    // constructors
-    private Quantiles(final int breakPointCount) {
-        this.breakPointCount = breakPointCount;
-    }
-
-    protected Quantiles(final Collection<K> values, final int breakPointCount) {
-        this(breakPointCount);
-    }
-
+    // constructor
     protected Quantiles(final Collection<K> keys, final Collection<V> values, final int breakPointCount) {
-        this(breakPointCount);
+        this.breakPointCount = breakPointCount;
+        this.keys = keys;
+        this.values = values;
+
+        // get average, min and max
+        this.minAverageMax = getMinAverageMaxValue(values);
+
+        // sort values
+
+        // get quantiles
+
+        // get median
     }
 
 
     // technical logic
-    public static <V extends ConcreteNumber> Pair<V, V> getMinMaxValue(final Collection<V> values) {
+    public static <V extends ConcreteNumber> Triplet<V, Double, V> getMinAverageMaxValue(final Collection<V> values) {
         if (null == values || 0 == values.size()) {
             return null;
         }
@@ -44,15 +48,54 @@ public class Quantiles<K,V extends ConcreteNumber> {
         V min = vs[0];
         V max = vs[0];
 
+        // average
+        Double average = 0.0;
+
         // determine smallest and biggest
         for (V item : vs) {
-            if (0 > item.compareTo(min)) {
+            average += average;
+            if (0 > ConcreteNumber.compareTo(item, min)) {
                 min = item;
-            } else if (0 < item.compareTo(max)) {
+            } else if (0 < ConcreteNumber.compareTo(item, max)) {
                 max = item;
             }
         }
 
-        return new Pair<V, V>(min, max);
+        average /= vs.length;
+
+        return new Triplet<V, Double, V>(min, average, max);
+    }
+
+    // getter / setter
+    public int getBreakPointCount() {
+        return breakPointCount;
+    }
+
+    public Triplet<V, Double, V> getMinAverageMax() {
+        return minAverageMax;
+    }
+
+    public V getMin() {
+        return minAverageMax.getValue0();
+    }
+
+    public Double getAverage() {
+        return minAverageMax.getValue1();
+    }
+
+    public V getMax() {
+        return minAverageMax.getValue2();
+    }
+
+    public V getMedian() {
+        return median;
+    }
+
+    public Collection<K> getKeys() {
+        return keys;
+    }
+
+    public Collection<V> getValues() {
+        return values;
     }
 }
