@@ -17,15 +17,21 @@ public class RadixSort {
     private final static int DECIMAL_MAPPING_COUNT = 10;
     private final static int EVERY_MAPPINGS_SIZE_DENOMINATOR = 3;
 
-    public static <V extends Integer /*Number*/> List<Integer> sortRadix(List<Integer> numbers) {
+    /**
+     * Sorts the given list with radix sort. This can be applied to lists of positive integer value only.
+     *
+     * @param value The list of unsorted values
+     * @return The radix sorted value list
+     */
+    public static List<Integer> sortRadix(List<Integer> value) {
 
         // init
-        ArrayList<Integer> result = new ArrayList<Integer>(numbers);
-        final int maxValue = Quantiles.getMinAverageMaxValue(numbers).getValue2();
+        ArrayList<Integer> result = new ArrayList<Integer>(value);
+        final int max = Quantiles.getMinAverageMaxValue(value).getValue2();
 
         ArrayList<ArrayList<Integer>> radixMapping = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < DECIMAL_MAPPING_COUNT; i++) {
-            radixMapping.add(new ArrayList<Integer>(numbers.size() / EVERY_MAPPINGS_SIZE_DENOMINATOR));
+            radixMapping.add(new ArrayList<Integer>(value.size() / EVERY_MAPPINGS_SIZE_DENOMINATOR));
         }
 
         Iterator<Integer> iterator;
@@ -38,9 +44,10 @@ public class RadixSort {
 
 
         // map
-        while (power < maxValue) {
+        while (power < max) {
             iterator = result.iterator();
 
+            // first pass
             while (iterator.hasNext()) {
                 number = iterator.next();
                 if (number < power) {
@@ -52,6 +59,7 @@ public class RadixSort {
                 }
             }
 
+            // second pass
             result.clear();
             for (i = 0; i < DECIMAL_MAPPING_COUNT; i++) {
                 bySize = radixMapping.get(i);
@@ -64,8 +72,6 @@ public class RadixSort {
             power *= DECIMAL_MAPPING_COUNT;
         }
 
-
-        assert result.size() == 15;
 
         return result;
     }

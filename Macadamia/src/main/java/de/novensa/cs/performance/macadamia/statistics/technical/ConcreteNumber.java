@@ -18,12 +18,13 @@ public class ConcreteNumber<N extends Number> extends Number {
         this.number = number;
     }
     
+    @SuppressWarnings("UnusedDeclaration")
     public int compareTo(N anotherNumber) {
         return compareTo(this.number, anotherNumber);
     }
 
     // comparison logic
-    @SuppressWarnings("FinalStaticMethod")
+    @SuppressWarnings({"FinalStaticMethod", "unchecked"})
     public static final <N extends Number> int compareTo(final N oneNumber, final N anotherNumber) {
 
         // extract values
