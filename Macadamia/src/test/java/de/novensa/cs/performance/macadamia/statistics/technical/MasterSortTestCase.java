@@ -40,28 +40,41 @@ public abstract class MasterSortTestCase extends TestCase {
 
 
     // getters
-    public static final List<Integer> getUnsorted() {
+    public static List<Integer> getUnsorted() {
         return UNSORTED;
     }
 
-    public static final List<Integer> getSorted() {
+    public static List<Integer> getSorted() {
         Integer[] sorted = UNSORTED.toArray(new Integer[UNSORTED.size()]);
         Arrays.sort(sorted);
         return Arrays.asList(sorted);
     }
 
-    public static final List<Integer> getUnsortedPositives() {
+    public static List<Integer> getUnsortedPositives() {
         return UNSORTED_POSITIVES;
     }
 
-    public static final List<Integer> getSortedPositives() {
+    public static List<Integer> getSortedPositives() {
         Integer[] sorted = UNSORTED_POSITIVES.toArray(new Integer[UNSORTED_POSITIVES.size()]);
         Arrays.sort(sorted);
         return Arrays.asList(sorted);
     }
 
 
+    /**
+     * Checks whether both lists do have the same elements. The lists are not allowed to point to the same memory
+     * reference or have differing sizes.
+     *
+     * @param a The expected list
+     * @param b The target list to find the origin elements in
+     * @param <V> The kind of values in both lists
+     * @return true iff all elements of <code>a</code> can be found in list <code>b</code>
+     */
     public static <V extends Number> boolean valuesAreTheSameButOutOfOrder(final List<V> a, final List<V> b) {
+
+        assert null != a && null != b;
+        assert a != b;
+        assert a.size() == b.size();
 
         for (V item : a) {
             if (!b.contains(item)) {
@@ -72,6 +85,31 @@ public abstract class MasterSortTestCase extends TestCase {
         return true;
     }
 
+
+    /**
+     * Checks the list with testing it´s orderings. First it makes sure the lists are the same length, not null, and
+     * do not point to the same data field. The identity check is made with <code>equals</code> method derived from
+     * <code>java.lang.Object</code> or the class itself.
+     *
+     * @param a The expected list
+     * @param b The list to checks it´s same order
+     * @param <V> The kind of values in both lists
+     * @return true iff both are identical in the elements contained
+     */
+    public static <V> boolean equalContentsInBothLists(final List<V> a, final List<V> b) {
+
+        assert null != a && null != b;
+        assert a != b;
+        assert a.size() == b.size();
+
+        for (V item : a) {
+            if (!a.equals(b)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 
 

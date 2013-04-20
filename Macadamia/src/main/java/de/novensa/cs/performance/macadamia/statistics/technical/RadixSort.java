@@ -23,7 +23,7 @@ public class RadixSort {
      * @param value The list of unsorted values
      * @return The radix sorted value list
      */
-    public static List<Integer> sortRadix(List<Integer> value) {
+    public static List<Integer> sort(final List<Integer> value) {
 
         // init
         ArrayList<Integer> result = new ArrayList<Integer>(value);

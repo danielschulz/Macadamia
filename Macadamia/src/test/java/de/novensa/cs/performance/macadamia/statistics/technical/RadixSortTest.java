@@ -21,9 +21,10 @@ public class RadixSortTest extends MasterSortTestCase {
         assertTrue(isSorted(getSorted()));
 
 
-        final List<Integer> values = RadixSort.sortRadix(inputs);
+        final List<Integer> values = RadixSort.sort(inputs);
         assertEquals(inputs.size(), values.size());
         assertTrue(valuesAreTheSameButOutOfOrder(inputs, values));
+        assertTrue(equalContentsInBothLists(getSortedPositives(), values));
 
         assertTrue(isSorted(values));
     }
