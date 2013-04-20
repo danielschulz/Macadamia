@@ -15,52 +15,58 @@ import java.util.List;
 public class RadixSort {
 
     private final static int DECIMAL_MAPPING_COUNT = 10;
+    private final static int EVERY_MAPPINGS_SIZE_DENOMINATOR = 3;
 
     public static <V extends Integer /*Number*/> List<Integer> sortRadix(List<Integer> numbers) {
 
-        ArrayList<Integer> localNumbers = new ArrayList<Integer>(numbers.size());
-        final int max = Quantiles.getMinAverageMaxValue(numbers).getValue2();
+        // init
+        ArrayList<Integer> result = new ArrayList<Integer>(numbers);
+        final int maxValue = Quantiles.getMinAverageMaxValue(numbers).getValue2();
 
         ArrayList<ArrayList<Integer>> radixMapping = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < DECIMAL_MAPPING_COUNT; i++) {
-            ArrayList<Integer> myList = new ArrayList<Integer>();
-            radixMapping.add(myList);
+            radixMapping.add(new ArrayList<Integer>(numbers.size() / EVERY_MAPPINGS_SIZE_DENOMINATOR));
         }
 
-        Integer power = 1;
         Iterator<Integer> iterator;
+        ArrayList<Integer> bySize;
+        Integer power = 1;
+        Integer number;
+        Integer help;
+        Integer pos;
+        int i, j;
 
-        while (power < max) {
-            iterator = localNumbers.iterator();
+
+        // map
+        while (power < maxValue) {
+            iterator = result.iterator();
+
             while (iterator.hasNext()) {
-                Integer nr = (Integer) iterator.next();
-                if (nr < power) {
-                    radixMapping.get(0).add(nr);
+                number = iterator.next();
+                if (number < power) {
+                    radixMapping.get(0).add(number);
                 } else {
-                    Integer help = nr / power;
-                    Integer pos = help % DECIMAL_MAPPING_COUNT;
-                    radixMapping.get(pos).add(nr);
+                    help = number / power;
+                    pos = help % DECIMAL_MAPPING_COUNT;
+                    radixMapping.get(pos).add(number);
                 }
             }
 
-            localNumbers.clear();
-            for (int i = 0; i < DECIMAL_MAPPING_COUNT; i++) {
-                ArrayList<Integer> myList = radixMapping.get(i);
-                for (int j = 0; j < myList.size(); j++) {
-                    localNumbers.add(myList.get(j));
+            result.clear();
+            for (i = 0; i < DECIMAL_MAPPING_COUNT; i++) {
+                bySize = radixMapping.get(i);
+                for (j = 0; j < bySize.size(); j++) {
+                    result.add(bySize.get(j));
                 }
                 radixMapping.get(i).clear();
             }
 
-            power = DECIMAL_MAPPING_COUNT * power;
+            power *= DECIMAL_MAPPING_COUNT;
         }
 
 
-        numbers.clear();
-        for (Integer nr : localNumbers) {
-            numbers.add(nr);
-        }
+        assert result.size() == 15;
 
-        return numbers;
+        return result;
     }
 }
