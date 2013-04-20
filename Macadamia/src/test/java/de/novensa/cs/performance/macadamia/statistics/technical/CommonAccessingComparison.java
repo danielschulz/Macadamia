@@ -1,5 +1,6 @@
 package de.novensa.cs.performance.macadamia.statistics.technical;
 
+import de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles.Quantiles;
 import org.javatuples.Pair;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class CommonAccessingComparison extends MasterSortTestCase {
     // constants
     private static final long SEED = 4096*4096;
     private static final Random RANDOM = new Random(SEED);
-    private static final long FACTOR = SEED;
+    private static final long FACTOR = 4096;
 
     // member fields
     private static int valueCount = 4096;
@@ -54,6 +55,7 @@ public class CommonAccessingComparison extends MasterSortTestCase {
             rawValues.add(i);
         }
 
+        System.gc();
         final long start = System.currentTimeMillis();
         List<Integer> result = getValuesBetween(rawValues, minMax);
         final long end = System.currentTimeMillis();
@@ -61,31 +63,21 @@ public class CommonAccessingComparison extends MasterSortTestCase {
         assert valuesAreTheSameButOutOfOrder(values, result);
         assert !equalContentsInBothLists(values, result);
 
-        final long duration = end - start;
-
-        System.out.println("common start: " + start);
-        System.out.println("common end:   " + end);
-        System.out.println("common time:  " + duration);
-
-        return duration;
+        return end - start;
     }
 
     public static long getTimeForRadixAccessing(final List<Integer> values, final Pair<Integer, Integer> minMax) {
 
+        final int max = Quantiles.getMinAverageMaxValue(values).getValue2();
+        System.gc();
         final long start = System.currentTimeMillis();
-        List<Integer> result = RadixSort.sort(values);
+        List<Integer> result = RadixSort.sort(values, max);
         final long end = System.currentTimeMillis();
 
         assert valuesAreTheSameButOutOfOrder(values, result);
         assert !equalContentsInBothLists(values, result);
 
-        final long duration = end - start;
-
-        System.out.println("radix start: " + start);
-        System.out.println("radix end:   " + end);
-        System.out.println("radix time:  " + duration);
-
-        return duration;
+        return end - start;
     }
 
     private static List<Integer> getValuesBetween(List<Integer> values, Pair<Integer, Integer> minMax) {
