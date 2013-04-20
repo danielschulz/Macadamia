@@ -1,7 +1,7 @@
 package de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles;
 
 import de.novensa.cs.performance.macadamia.statistics.technical.ConcreteNumber;
-import org.javatuples.Pair;
+import org.javatuples.Triplet;
 import org.junit.Test;
 
 /**
@@ -15,14 +15,17 @@ public class QuantilesTest extends QuantilesMasterTestCase {
     @Test
     public void testMinMaxValues() throws Exception {
         // init
-        Pair<ConcreteNumber<Long>, ConcreteNumber<Long>> minMax = Quantiles.getMinAverageMaxValue(VALUE_LIST);
+        Triplet<ConcreteNumber<Long>, Double, ConcreteNumber<Long>> minAverageMaxValue =
+                Quantiles.getMinAverageMaxValue(VALUE_LIST);
 
-        Long min = minMax.getValue0().longValue();
-        Long max = minMax.getValue1().longValue();
+        Long min = minAverageMaxValue.getValue0().longValue();
+        Long max = minAverageMaxValue.getValue2().longValue();
+        Double average = minAverageMaxValue.getValue1();
 
 
         // test
         assertEquals(MIN, min);
         assertEquals(MAX, max);
+        assertEquals(AVERAGE, average);
     }
 }

@@ -53,7 +53,7 @@ public class Quantiles<K,V extends ConcreteNumber> {
 
         // determine smallest and biggest
         for (V item : vs) {
-            average += average;
+            average += item.doubleValue();
             if (0 > ConcreteNumber.compareTo(item, min)) {
                 min = item;
             } else if (0 < ConcreteNumber.compareTo(item, max)) {

@@ -15,6 +15,8 @@ public class QuantilesMasterTestCase extends TestCase {
 
     public static final Long MIN = -10L;
     public static final Long MAX = 1000L;
+    public static final Double AVERAGE = 175.0;
+
 
     public static final List<ConcreteNumber<Long>> VALUE_LIST = new ArrayList<ConcreteNumber<Long>>(32);
     static {

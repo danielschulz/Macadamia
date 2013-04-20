@@ -26,32 +26,75 @@ public class ConcreteNumber<N extends Number> extends Number {
     @SuppressWarnings("FinalStaticMethod")
     public static final <N extends Number> int compareTo(final N oneNumber, final N anotherNumber) {
 
-        if (oneNumber instanceof Long) {
-            return (oneNumber.longValue() < anotherNumber.longValue()) ?
-                    -1 : ((oneNumber.longValue() == anotherNumber.longValue()) ? 0 : 1);
-
-        } else if (oneNumber instanceof Integer) {
-            return (oneNumber.intValue() < anotherNumber.intValue()) ?
-                    -1 : ((oneNumber.intValue() == anotherNumber.intValue()) ? 0 : 1);
-
-        } else if (oneNumber instanceof Float) {
-            return (oneNumber.floatValue() < anotherNumber.floatValue()) ?
-                    -1 : ((oneNumber.floatValue() == anotherNumber.floatValue()) ? 0 : 1);
-
-        } else if (oneNumber instanceof Double) {
-            return (oneNumber.doubleValue() < anotherNumber.doubleValue()) ?
-                    -1 : ((oneNumber.doubleValue() == anotherNumber.doubleValue()) ? 0 : 1);
-
-        } else if (oneNumber instanceof Short) {
-            return (oneNumber.shortValue() < anotherNumber.shortValue()) ?
-                    -1 : ((oneNumber.shortValue() == anotherNumber.shortValue()) ? 0 : 1);
-
-        } else if (oneNumber instanceof Byte) {
-            return (oneNumber.byteValue() < anotherNumber.byteValue()) ?
-                    -1 : ((oneNumber.byteValue() == anotherNumber.byteValue()) ? 0 : 1);
+        // extract values
+        final N oneNumberInner;
+        if (oneNumber instanceof ConcreteNumber) {
+            oneNumberInner = (N) ((ConcreteNumber) oneNumber).getValue();
+        } else {
+            oneNumberInner = oneNumber;
         }
 
-        throw new IllegalStateException(ErrorMessages.COMPARISON_WAS_NOT_POSSIBLE);
+
+        final N anotherNumberInner;
+        if (anotherNumber instanceof ConcreteNumber) {
+            anotherNumberInner = (N) ((ConcreteNumber) anotherNumber).getValue();
+        } else {
+            anotherNumberInner = anotherNumber;
+        }
+        
+        
+
+        // compare them
+        if (oneNumberInner instanceof Long) {
+            return (oneNumberInner.longValue() < anotherNumberInner.longValue()) ?
+                    -1 : ((oneNumberInner.longValue() == anotherNumberInner.longValue()) ? 0 : 1);
+
+        } else if (oneNumberInner instanceof Integer) {
+            return (oneNumberInner.intValue() < anotherNumberInner.intValue()) ?
+                    -1 : ((oneNumberInner.intValue() == anotherNumberInner.intValue()) ? 0 : 1);
+
+        } else if (oneNumberInner instanceof Float) {
+            return (oneNumberInner.floatValue() < anotherNumberInner.floatValue()) ?
+                    -1 : ((oneNumberInner.floatValue() == anotherNumberInner.floatValue()) ? 0 : 1);
+
+        } else if (oneNumberInner instanceof Double) {
+            return (oneNumberInner.doubleValue() < anotherNumberInner.doubleValue()) ?
+                    -1 : ((oneNumberInner.doubleValue() == anotherNumberInner.doubleValue()) ? 0 : 1);
+
+        } else if (oneNumberInner instanceof Short) {
+            return (oneNumberInner.shortValue() < anotherNumberInner.shortValue()) ?
+                    -1 : ((oneNumberInner.shortValue() == anotherNumberInner.shortValue()) ? 0 : 1);
+
+        } else if (oneNumberInner instanceof Byte) {
+            return (oneNumberInner.byteValue() < anotherNumberInner.byteValue()) ?
+                    -1 : ((oneNumberInner.byteValue() == anotherNumberInner.byteValue()) ? 0 : 1);
+        }
+
+        throw new IllegalStateException(ErrorMessages.NO_INSTANCE_MATCHES);
+    }
+    
+    public final Number getValue() {
+
+        if (this.number instanceof Long) {
+            return this.number.longValue();
+
+        } else if (this.number instanceof Integer) {
+            return this.number.longValue();
+            
+        } else if (this.number instanceof Float) {
+            return this.number.longValue();
+            
+        } else if (this.number instanceof Double) {
+            return this.number.longValue();
+            
+        } else if (this.number instanceof Short) {
+            return this.number.longValue();
+            
+        } else if (this.number instanceof Byte) {
+            return this.number.longValue();
+        }
+
+        throw new IllegalStateException(ErrorMessages.NO_INSTANCE_MATCHES);
     }
 
 

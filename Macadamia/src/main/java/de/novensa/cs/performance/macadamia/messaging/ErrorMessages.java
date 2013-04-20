@@ -21,7 +21,7 @@ public class ErrorMessages {
     private static final String CASTING_MAY_CAUSE_AN_ERROR = "The casting from class '%s' to class '%s' is very " +
             "likely to fail with a ClassCastException.";
 
-    public static final String COMPARISON_WAS_NOT_POSSIBLE = "The comparison for the value was not possible.";
+    public static final String NO_INSTANCE_MATCHES = "The expected instances do all not match.";
 
 
     // Methods to format a little more complex messages
