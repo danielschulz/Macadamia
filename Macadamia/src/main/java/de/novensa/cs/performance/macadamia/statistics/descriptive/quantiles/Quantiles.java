@@ -1,5 +1,6 @@
 package de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles;
 
+import de.novensa.cs.performance.macadamia.statistics.technical.ConcreteNumber;
 import org.javatuples.Pair;
 
 import java.util.Collection;
@@ -9,13 +10,13 @@ import java.util.Collection;
  *
  * @author Daniel Schulz
  */
-public class Quantiles<K,V extends Long> {
+public class Quantiles<K,V extends ConcreteNumber> {
 
     // member fields
     private final int breakPointCount;
-    private /*final*/ Pair<Long, Long> minMaxValue;
-    private /*final*/ long median;
-    private /*final*/ long average;
+    private /*final*/ Pair<V, V> minMaxValue;
+    private /*final*/ V median;
+    private /*final*/ V average;
 
 
     // constructors
@@ -33,12 +34,12 @@ public class Quantiles<K,V extends Long> {
 
 
     // technical logic
-    public static <V extends Long> Pair<V, V> getMinMaxValue(final Collection<V> values) {
+    public static <V extends ConcreteNumber> Pair<V, V> getMinMaxValue(final Collection<V> values) {
         if (null == values || 0 == values.size()) {
             return null;
         }
 
-        final V[] vs = (V[]) values.toArray(new Long[values.size()]);
+        final V[] vs = (V[]) values.toArray(new ConcreteNumber[values.size()]);
         V min = vs[0];
         V max = vs[0];
 

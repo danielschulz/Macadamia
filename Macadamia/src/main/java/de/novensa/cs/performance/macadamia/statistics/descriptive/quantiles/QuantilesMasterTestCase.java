@@ -1,5 +1,6 @@
 package de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles;
 
+import de.novensa.cs.performance.macadamia.statistics.technical.ConcreteNumber;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -15,23 +16,32 @@ public class QuantilesMasterTestCase extends TestCase {
     public static final Long MIN = -10L;
     public static final Long MAX = 1000L;
 
-    public static final List<Long> VALUE_LIST = new ArrayList<Long>(32);
+    public static final List<ConcreteNumber<Long>> VALUE_LIST = new ArrayList<ConcreteNumber<Long>>(32);
     static {
-        VALUE_LIST.add(10L);
-        VALUE_LIST.add(MAX);
-        VALUE_LIST.add(0L);
+        add(VALUE_LIST, 10L);
+        add(VALUE_LIST, 10L);
+        add(VALUE_LIST, MAX);
+        add(VALUE_LIST, 0L);
 
-        VALUE_LIST.add(-10L);
-        VALUE_LIST.add(500L);
-        VALUE_LIST.add(750L);
+        add(VALUE_LIST, -10L);
+        add(VALUE_LIST, 500L);
+        add(VALUE_LIST, 750L);
 
-        VALUE_LIST.add(0L);
-        VALUE_LIST.add(MIN);
-        VALUE_LIST.add(10L);
+        add(VALUE_LIST, 0L);
+        add(VALUE_LIST, MIN);
+        add(VALUE_LIST, 10L);
 
-        VALUE_LIST.add(100L);
-        VALUE_LIST.add(50L);
-        VALUE_LIST.add(25L);
-        VALUE_LIST.add(15L);
+        add(VALUE_LIST, 100L);
+        add(VALUE_LIST, 50L);
+        add(VALUE_LIST, 25L);
+        add(VALUE_LIST, 15L);
+    }
+
+    private static <N extends Number> void add(final List<ConcreteNumber<N>> values, N number) {
+        values.add(new ConcreteNumber<N>(number));
+    }
+
+    // default test case
+    public void testNothing() throws Exception {
     }
 }
