@@ -61,6 +61,18 @@ public abstract class MasterSortTestCase extends TestCase {
     }
 
 
+    public static <V extends Number> boolean valuesAreTheSameButOutOfOrder(final List<V> a, final List<V> b) {
+
+        for (V item : a) {
+            if (!b.contains(item)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
 
 
     // default test case

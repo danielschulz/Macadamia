@@ -44,7 +44,7 @@ public class Quantiles<K,V extends ConcreteNumber> {
         }
 
         //noinspection unchecked,SuspiciousToArrayCall
-        final V[] vs = (V[]) values.toArray(new ConcreteNumber[values.size()]);
+        final V[] vs = (V[]) values.toArray(new Number[values.size()]);
         V min = vs[0];
         V max = vs[0];
 
