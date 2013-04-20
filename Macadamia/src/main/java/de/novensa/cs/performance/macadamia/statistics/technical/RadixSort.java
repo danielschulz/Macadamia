@@ -36,6 +36,7 @@ public class RadixSort {
     private static <N extends Number> List<N> sortInternal(final List<N> value) {
 
         // init
+        @SuppressWarnings("unchecked")
         ArrayList<Integer> result = new ArrayList<Integer>((List<Integer>) value);
         final int max = (Integer) Quantiles.getMinAverageMaxValue(value).getValue2();
 
@@ -83,6 +84,7 @@ public class RadixSort {
         }
 
 
+        //noinspection unchecked
         return (List<N>) result;
     }
 }
