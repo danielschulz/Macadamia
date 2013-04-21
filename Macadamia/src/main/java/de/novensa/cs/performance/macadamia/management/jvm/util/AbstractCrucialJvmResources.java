@@ -32,6 +32,7 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
     // runnable implementations
     @Override
     public void run() {
+        ++this.updateCount;
         scheduleUpdates();
     }
 
