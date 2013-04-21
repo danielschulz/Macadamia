@@ -10,4 +10,5 @@ public class Constants {
     public static final Class OBJECT = Object.class;
     public static final Class STRING = String.class;
     public static final int INITIAL_SIZE_OF_CLASS_TO_CLASS_TO_PREDICTION_CACHE = 1024;
+    public static final int INITIAL_SIZE_OF_MANAGEMENT_HISTORY_LIST = INITIAL_SIZE_OF_CLASS_TO_CLASS_TO_PREDICTION_CACHE;
 }
