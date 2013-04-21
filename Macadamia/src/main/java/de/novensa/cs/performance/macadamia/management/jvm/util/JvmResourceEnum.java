@@ -1,4 +1,4 @@
-package de.novensa.cs.performance.macadamia.management.jvm;
+package de.novensa.cs.performance.macadamia.management.jvm.util;
 
 /**
  * This enum lists all the resources we consider when looking at the JVM management information.

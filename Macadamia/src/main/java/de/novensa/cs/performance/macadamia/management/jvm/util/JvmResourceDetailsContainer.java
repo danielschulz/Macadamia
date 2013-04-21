@@ -1,4 +1,4 @@
-package de.novensa.cs.performance.macadamia.management.jvm;
+package de.novensa.cs.performance.macadamia.management.jvm.util;
 
 import de.novensa.cs.performance.macadamia.util.Constants;
 

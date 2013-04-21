@@ -1,4 +1,4 @@
-package de.novensa.cs.performance.macadamia.management.jvm;
+package de.novensa.cs.performance.macadamia.management.jvm.util;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
