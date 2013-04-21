@@ -1,5 +1,6 @@
 package de.novensa.cs.performance.macadamia.management.jvm;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ public class JvmResourceCrucialDistribution {
     public JvmResourceCrucialDistribution() {
     }
 
+
     // special setter
     public void set(final Map<JvmResourceEnum, Float> map) {
         this.preciousMap.clear();
@@ -30,11 +32,17 @@ public class JvmResourceCrucialDistribution {
         }
     }
 
+    public boolean hasItem(final JvmResourceEnum resourceEnum) {
+        return null != this.preciousMap.get(resourceEnum);
+    }
+
+
     // getter and setter
     public boolean set(final JvmResourceEnum resourceEnum, final Float value) {
         return null != this.preciousMap.put(resourceEnum, value);
     }
 
+    @Nullable
     public Float get(final JvmResourceEnum resourceEnum) {
         return this.preciousMap.get(resourceEnum);
     }

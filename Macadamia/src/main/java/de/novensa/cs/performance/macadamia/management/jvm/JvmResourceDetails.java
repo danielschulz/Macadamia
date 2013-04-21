@@ -8,7 +8,6 @@ package de.novensa.cs.performance.macadamia.management.jvm;
 public class JvmResourceDetails {
 
 
-
     public JvmResourceDetails() {
 
     }

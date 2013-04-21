@@ -14,7 +14,7 @@ import java.util.List;
 public class JvmResourceDetailsContainer {
 
     private final List<JvmResourceDetails> details;
-    private JvmResourceDetailsContainer container = null;
+    private static JvmResourceDetailsContainer container = null;
 
     // constructors for singleton
     private JvmResourceDetailsContainer() {
@@ -22,12 +22,12 @@ public class JvmResourceDetailsContainer {
     }
 
 
-    public synchronized JvmResourceDetailsContainer getInstance() {
-        if (null == this.container) {
-            this.container = new JvmResourceDetailsContainer();
+    public static synchronized JvmResourceDetailsContainer getInstance() {
+        if (null == container) {
+            container = new JvmResourceDetailsContainer();
         }
 
-        return this.container;
+        return container;
     }
 
     // special getter and setter
