@@ -1,5 +1,8 @@
 package de.novensa.cs.performance.macadamia.management.jvm;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This maps each <code>JvmResourceEnum</code> i to a value x_i in 0..1. The sum of all x_i there are is exactly one.
  * So all the values do sum up to one. The number of items is the number of enums in the mapping class. The amount of
@@ -9,4 +12,30 @@ package de.novensa.cs.performance.macadamia.management.jvm;
  * @author Daniel Schulz
  */
 public class JvmResourceCrucialDistribution {
+
+    private final HashMap<JvmResourceEnum, Float> preciousMap =
+            new HashMap<JvmResourceEnum, Float>(JvmResourceEnum.values().length);
+
+
+    // constructor
+    public JvmResourceCrucialDistribution() {
+    }
+
+    // special setter
+    public void set(final Map<JvmResourceEnum, Float> map) {
+        this.preciousMap.clear();
+
+        for (JvmResourceEnum resourceEnum : map.keySet()) {
+            this.preciousMap.put(resourceEnum, map.get(resourceEnum));
+        }
+    }
+
+    // getter and setter
+    public boolean set(final JvmResourceEnum resourceEnum, final Float value) {
+        return null != this.preciousMap.put(resourceEnum, value);
+    }
+
+    public Float get(final JvmResourceEnum resourceEnum) {
+        return this.preciousMap.get(resourceEnum);
+    }
 }
