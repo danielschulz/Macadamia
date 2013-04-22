@@ -6,5 +6,6 @@ package de.novensa.cs.performance.macadamia.management.jvm.util;
  * @author Daniel Schulz
  */
 public enum JvmResourceEnum {
-    Memory, CpuTime, Network, DiskReads, DiskWrites, UserTime
+    Memory, CpuTime, Network, DiskReads, DiskWrites, DatabaseReads, DatabaseWrites,
+    MessageServices, UserTime
 }

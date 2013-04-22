@@ -15,6 +15,11 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class AbstractCrucialJvmResources implements Runnable {
 
+    // constants
+    @SuppressWarnings("FieldCanBeLocal")
+    private final TimeUnit DEFAULT_TIME_UNIT = TimeUnit.SECONDS;
+
+
     // field members
     protected final long timeStamp;
     protected final JvmResourceDetailsContainer jvmResourceDetailsContainer;
@@ -23,6 +28,7 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
     protected final TimeUnit timeUnit;
 
     protected long updateCount = 0L;
+    protected final String reflectiveReference;
 
 
     // technical logic
@@ -38,7 +44,24 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
 
 
     // constructor
-    public AbstractCrucialJvmResources(final long initDelay, final long period, @Nullable TimeUnit timeUnit) {
+    public AbstractCrucialJvmResources(final long initDelay,
+                                       final long period) {
+
+        this(initDelay, period, null, null);
+    }
+
+    public AbstractCrucialJvmResources(final long initDelay,
+                                       final long period,
+                                       @Nullable final TimeUnit timeUnit) {
+
+        this(initDelay, period, timeUnit, null);
+    }
+
+    public AbstractCrucialJvmResources(final long initDelay,
+                                       final long period,
+                                       @Nullable final TimeUnit timeUnit,
+                                       @Nullable final String reflectiveReference) {
+
         // get immutable fields
         this.timeStamp = System.nanoTime();
         this.jvmResourceDetailsContainer = JvmResourceDetailsContainer.getInstance();
@@ -46,11 +69,12 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
         // set field members
         this.initDelay = initDelay;
         this.period = period;
-        this.timeUnit = timeUnit;
+        this.timeUnit = ((null != timeUnit) ? timeUnit : DEFAULT_TIME_UNIT);
+        this.reflectiveReference = null != reflectiveReference ? reflectiveReference : this.toString();
 
         // set up runnable
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.scheduleAtFixedRate(this, initDelay, period, timeUnit);
+        executorService.scheduleAtFixedRate(this, initDelay, period, this.timeUnit);
     }
 
 

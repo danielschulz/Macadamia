@@ -20,7 +20,7 @@ public class UniformDistributedCrucialJvmResourcesTest extends TestCase {
     public void testScheduleUpdatesTimes() throws Exception {
         // init
         UniformDistributedCrucialJvmResources resources =
-                new UniformDistributedCrucialJvmResources(1, 3, TimeUnit.SECONDS);
+                new UniformDistributedCrucialJvmResources(initDelay, period, TimeUnit.SECONDS);
 
         // tests
         // nothing in yet
@@ -46,11 +46,11 @@ public class UniformDistributedCrucialJvmResourcesTest extends TestCase {
         assertEquals(2, resources.getHistorySize());
 
         // second period
-        Thread.sleep(3 * TO_MILLISECONDS);
-        assertEquals(3, resources.getHistorySize());
+        Thread.sleep(period * TO_MILLISECONDS);
+        assertEquals(period, resources.getHistorySize());
 
         // three period
-        Thread.sleep(3 * TO_MILLISECONDS);
+        Thread.sleep(period * TO_MILLISECONDS);
         assertEquals(4, resources.getHistorySize());
     }
 }
