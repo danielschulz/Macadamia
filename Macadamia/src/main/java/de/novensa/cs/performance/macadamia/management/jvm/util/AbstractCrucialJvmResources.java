@@ -59,6 +59,10 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
         return this.jvmResourceDetailsContainer.get(index);
     }
 
+    public int getHistorySize() {
+        return this.jvmResourceDetailsContainer.getHistorySize();
+    }
+
 
     // getter
     public long getTimeStamp() {

@@ -1,5 +1,9 @@
 package de.novensa.cs.performance.macadamia.management.jvm.util;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryUsage;
+import java.lang.management.ThreadInfo;
+
 /**
  * Get the detailed versioned information about the JVM resources.
  *
@@ -8,11 +12,20 @@ package de.novensa.cs.performance.macadamia.management.jvm.util;
 public class JvmResourceDetails {
 
     private final long timeStamp;
+    private final MemoryUsage heapUsage;
+    private final MemoryUsage nonHeapUsage;
+    private final ThreadInfo[] threadInfos;
+
 
 
     // constructor
     public JvmResourceDetails() {
         this.timeStamp = System.nanoTime();
+
+        this.heapUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
+        this.nonHeapUsage = ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage();
+        this.threadInfos =
+                ManagementFactory.getThreadMXBean().getThreadInfo(ManagementFactory.getThreadMXBean().getAllThreadIds());
     }
 
     // getter
