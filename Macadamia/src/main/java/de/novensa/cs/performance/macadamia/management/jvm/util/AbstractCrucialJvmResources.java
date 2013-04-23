@@ -77,6 +77,12 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
         executorService.scheduleAtFixedRate(this, initDelay, period, this.timeUnit);
     }
 
+    
+    // add items
+    protected boolean add(final JvmResourceDetails resourceDetails) {
+        return this.jvmResourceDetailsContainer.add(resourceDetails, this.reflectiveReference);
+    }
+
 
     // special getter
     public JvmResourceDetails get(final int index) {
