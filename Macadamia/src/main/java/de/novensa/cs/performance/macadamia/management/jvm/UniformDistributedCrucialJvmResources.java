@@ -19,7 +19,7 @@ public class UniformDistributedCrucialJvmResources extends AbstractCrucialJvmRes
 
     @Override
     public void scheduleUpdates() {
-        this.jvmResourceDetailsContainer.add(new JvmResourceDetails());
+        this.add(new JvmResourceDetails());
     }
 
 
