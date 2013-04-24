@@ -22,7 +22,7 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
 
     // field members
     protected final long timeStamp;
-    protected final JvmResourceDetailsContainer jvmResourceDetailsContainer;
+    private final JvmResourceDetailsContainer jvmResourceDetailsContainer;
     protected final long initDelay;
     protected final long period;
     protected final TimeUnit timeUnit;

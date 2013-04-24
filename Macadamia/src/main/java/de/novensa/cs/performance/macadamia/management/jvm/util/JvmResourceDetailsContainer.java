@@ -35,6 +35,7 @@ public class JvmResourceDetailsContainer {
         return container;
     }
 
+
     // special getter and setter
     public boolean hasHistoryItem(final JvmResourceDetails resourceDetails) {
         return this.details.contains(resourceDetails);

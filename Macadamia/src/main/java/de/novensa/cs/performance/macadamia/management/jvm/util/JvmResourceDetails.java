@@ -14,7 +14,7 @@ public class JvmResourceDetails {
     private final long timeStamp;
     private final MemoryUsage heapUsage;
     private final MemoryUsage nonHeapUsage;
-    private final ThreadInfo[] threadInfos;
+    private final ThreadInfo[] threadInformation;
 
 
 
@@ -24,12 +24,24 @@ public class JvmResourceDetails {
 
         this.heapUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
         this.nonHeapUsage = ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage();
-        this.threadInfos =
+        this.threadInformation =
                 ManagementFactory.getThreadMXBean().getThreadInfo(ManagementFactory.getThreadMXBean().getAllThreadIds());
     }
 
     // getter
     public long getTimeStamp() {
         return timeStamp;
+    }
+
+    public MemoryUsage getHeapUsage() {
+        return heapUsage;
+    }
+
+    public MemoryUsage getNonHeapUsage() {
+        return nonHeapUsage;
+    }
+
+    public ThreadInfo[] getThreadInformation() {
+        return threadInformation;
     }
 }
