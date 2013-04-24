@@ -13,11 +13,12 @@ public class ReflectiveReferenceToResourceDetailsComparator<T extends Comparable
     // specific super overwrites
     @Override
     public int compare(final T oneItem, final T anotherItem) {
+        //noinspection unchecked
         return oneItem.compareTo(anotherItem);
     }
 
     @Override
     public boolean equals(final Object obj) {
-        return obj == this ? true : false;
+        return obj instanceof Comparable && obj == this;
     }
 }
