@@ -1,6 +1,7 @@
 package de.novensa.cs.performance.macadamia.management.jvm.util;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -91,6 +92,15 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
 
     public int getHistorySize() {
         return this.jvmResourceDetailsContainer.getHistorySize();
+    }
+
+    public List<JvmResourceDetails> getAllJvmResourceDetails() {
+        return this.jvmResourceDetailsContainer.getAllJvmResourceDetails();
+    }
+
+    @Nullable
+    public List<JvmResourceDetails> getAllJvmResourceDetails(final String collectorId) {
+        return this.jvmResourceDetailsContainer.getJvmResourceDetailsForCollector(collectorId);
     }
 
 

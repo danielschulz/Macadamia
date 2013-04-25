@@ -19,6 +19,7 @@ public class JvmResourceDetailsContainer {
     private final Map<String, List<JvmResourceDetails>> resourceDetailsMap;
     private static JvmResourceDetailsContainer container = null;
 
+
     // constructors for singleton
     private JvmResourceDetailsContainer() {
         this.details = new ArrayList<JvmResourceDetails>(Constants.INITIAL_SIZE_OF_MANAGEMENT_HISTORY_LIST);
@@ -57,6 +58,20 @@ public class JvmResourceDetailsContainer {
         }
 
         // error case only
+        return null;
+    }
+
+
+    public List<JvmResourceDetails> getAllJvmResourceDetails() {
+        return this.details;
+    }
+
+    @Nullable
+    public List<JvmResourceDetails> getJvmResourceDetailsForCollector(final String collectorId) {
+        if (null == collectorId) {
+            this.resourceDetailsMap.get(collectorId);
+        }
+
         return null;
     }
 

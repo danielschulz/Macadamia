@@ -17,7 +17,6 @@ public class JvmResourceDetails {
     private final ThreadInfo[] threadInformation;
 
 
-
     // constructor
     public JvmResourceDetails() {
         this.timeStamp = System.nanoTime();
@@ -27,6 +26,7 @@ public class JvmResourceDetails {
         this.threadInformation =
                 ManagementFactory.getThreadMXBean().getThreadInfo(ManagementFactory.getThreadMXBean().getAllThreadIds());
     }
+
 
     // getter
     public long getTimeStamp() {
