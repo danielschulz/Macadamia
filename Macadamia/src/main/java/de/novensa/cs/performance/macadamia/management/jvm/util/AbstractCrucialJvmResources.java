@@ -91,7 +91,7 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
     }
 
     public int getHistorySize() {
-        return this.jvmResourceDetailsContainer.getHistorySize();
+        return this.jvmResourceDetailsContainer.getHistorySizeAll();
     }
 
     public List<JvmResourceDetails> getAllJvmResourceDetails() {

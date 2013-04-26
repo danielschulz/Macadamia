@@ -1,11 +1,11 @@
-package de.novensa.cs.performance.macadamia.management.jvm.util;
+package de.novensa.cs.performance.macadamia.management.jvm.util.additionalInformation;
 
 /**
  * This enum lists all the resources we consider when looking at the JVM management information.
  *
  * @author Daniel Schulz
  */
-public enum JvmResourceEnum {
+public enum GenericResourceEnum {
     Memory, CpuTime, Network, DiskReads, DiskWrites, DatabaseReads, DatabaseWrites,
     MessageServices, UserTime
 }

@@ -47,7 +47,7 @@ public class JvmResourceDetailsContainer {
         return this.details.size() > index && 0 <= index && null != this.details.get(index);
     }
 
-    public int getHistorySize() {
+    public int getHistorySizeAll() {
         return this.details.size();
     }
 
