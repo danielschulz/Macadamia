@@ -1,5 +1,7 @@
 package de.novensa.cs.performance.macadamia.management.jvm.util.additionalInformation;
 
+import de.novensa.cs.performance.macadamia.management.jvm.util.TimeStampUtil;
+
 import javax.annotation.Nullable;
 
 /**
@@ -38,7 +40,7 @@ public class AdditionalResource<R, S, T> {
         assert null != resourceIdentifier;
         assert null != actionIdentifier;
 
-        this.timeStamp = System.currentTimeMillis();
+        this.timeStamp = TimeStampUtil.getTimeStamp();
 
         this.resourceEnum = resourceEnum;
         this.resourceIdentifier = resourceIdentifier;

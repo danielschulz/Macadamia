@@ -64,7 +64,7 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
                                        @Nullable final String reflectiveReference) {
 
         // get immutable fields
-        this.timeStamp = System.nanoTime();
+        this.timeStamp = TimeStampUtil.getTimeStamp();
         this.jvmResourceDetailsContainer = JvmResourceDetailsContainer.getInstance();
 
         // set field members

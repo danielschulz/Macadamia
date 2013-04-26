@@ -1,5 +1,6 @@
 package de.novensa.cs.performance.macadamia.statistics.technical;
 
+import de.novensa.cs.performance.macadamia.management.jvm.util.TimeStampUtil;
 import de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles.Quantiles;
 import org.javatuples.Pair;
 
@@ -56,9 +57,9 @@ public class CommonAccessingComparison extends MasterSortTestCase {
         }
 
         System.gc();
-        final long start = System.currentTimeMillis();
+        final long start = TimeStampUtil.getTimeStamp();
         List<Integer> result = getValuesBetween(rawValues, minMax);
-        final long end = System.currentTimeMillis();
+        final long end = TimeStampUtil.getTimeStamp();
 
         assert valuesAreTheSameButOutOfOrder(values, result);
         assert !equalContentsInBothLists(values, result);
@@ -70,9 +71,9 @@ public class CommonAccessingComparison extends MasterSortTestCase {
 
         final int max = Quantiles.getMinAverageMaxValue(values).getValue2();
         System.gc();
-        final long start = System.currentTimeMillis();
+        final long start = TimeStampUtil.getTimeStamp();
         List<Integer> result = RadixSort.sort(values, max);
-        final long end = System.currentTimeMillis();
+        final long end = TimeStampUtil.getTimeStamp();
 
         assert valuesAreTheSameButOutOfOrder(values, result);
         assert !equalContentsInBothLists(values, result);

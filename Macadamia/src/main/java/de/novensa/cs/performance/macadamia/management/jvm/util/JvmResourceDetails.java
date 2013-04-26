@@ -19,7 +19,7 @@ public class JvmResourceDetails {
 
     // constructor
     public JvmResourceDetails() {
-        this.timeStamp = System.nanoTime();
+        this.timeStamp = TimeStampUtil.getTimeStamp();
 
         this.heapUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
         this.nonHeapUsage = ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage();
