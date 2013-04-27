@@ -1,7 +1,7 @@
 package de.novensa.cs.performance.macadamia.management.jvm.util;
 
 /**
- * Provides all kind of time stamp relevant util methods.
+ * Provides all kind of time stamp relevant resources methods.
  *
  * @author Daniel Schulz
  */

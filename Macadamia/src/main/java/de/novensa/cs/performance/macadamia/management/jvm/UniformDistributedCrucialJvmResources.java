@@ -1,7 +1,7 @@
 package de.novensa.cs.performance.macadamia.management.jvm;
 
-import de.novensa.cs.performance.macadamia.management.jvm.util.AbstractCrucialJvmResources;
-import de.novensa.cs.performance.macadamia.management.jvm.util.JvmResourceDetails;
+import de.novensa.cs.performance.macadamia.management.jvm.resources.AbstractCrucialJvmResources;
+import de.novensa.cs.performance.macadamia.management.jvm.resources.JvmResourceDetails;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.TimeUnit;

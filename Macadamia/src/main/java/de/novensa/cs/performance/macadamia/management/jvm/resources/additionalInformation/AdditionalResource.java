@@ -1,5 +1,6 @@
-package de.novensa.cs.performance.macadamia.management.jvm.util.additionalInformation;
+package de.novensa.cs.performance.macadamia.management.jvm.resources.additionalInformation;
 
+import de.novensa.cs.performance.macadamia.management.jvm.resources.enums.GenericResourceEnum;
 import de.novensa.cs.performance.macadamia.management.jvm.util.TimeStampUtil;
 
 import javax.annotation.Nullable;

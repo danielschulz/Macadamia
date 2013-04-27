@@ -1,6 +1,6 @@
-package de.novensa.cs.performance.macadamia.management.jvm.util;
+package de.novensa.cs.performance.macadamia.management.jvm.resources;
 
-import de.novensa.cs.performance.macadamia.management.jvm.util.additionalInformation.GenericResourceEnum;
+import de.novensa.cs.performance.macadamia.management.jvm.resources.enums.GenericResourceEnum;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

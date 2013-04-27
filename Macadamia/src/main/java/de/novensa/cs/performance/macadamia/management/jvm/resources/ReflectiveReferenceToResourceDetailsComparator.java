@@ -1,4 +1,4 @@
-package de.novensa.cs.performance.macadamia.management.jvm.util;
+package de.novensa.cs.performance.macadamia.management.jvm.resources;
 
 import java.util.Comparator;
 

@@ -1,4 +1,6 @@
-package de.novensa.cs.performance.macadamia.management.jvm.util;
+package de.novensa.cs.performance.macadamia.management.jvm.resources;
+
+import de.novensa.cs.performance.macadamia.management.jvm.util.TimeStampUtil;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryUsage;
