@@ -1,5 +1,6 @@
 package de.novensa.cs.performance.macadamia.management.jvm.resources;
 
+import de.novensa.cs.performance.macadamia.management.jvm.resources.enums.ApplicationPhase;
 import de.novensa.cs.performance.macadamia.management.jvm.util.TimeStampUtil;
 
 import javax.annotation.Nullable;
@@ -31,6 +32,7 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
     protected final TimeUnit timeUnit;
 
     protected long updateCount = 0L;
+    protected ApplicationPhase applicationPhase;
     protected final String reflectiveReference;
 
 
@@ -50,20 +52,21 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
     public AbstractCrucialJvmResources(final long initDelay,
                                        final long period) {
 
-        this(initDelay, period, null, null);
+        this(initDelay, period, null, null, null);
     }
 
     public AbstractCrucialJvmResources(final long initDelay,
                                        final long period,
                                        @Nullable final TimeUnit timeUnit) {
 
-        this(initDelay, period, timeUnit, null);
+        this(initDelay, period, timeUnit, null, null);
     }
 
     public AbstractCrucialJvmResources(final long initDelay,
                                        final long period,
                                        @Nullable final TimeUnit timeUnit,
-                                       @Nullable final String reflectiveReference) {
+                                       @Nullable final String reflectiveReference,
+                                       @Nullable final ApplicationPhase applicationPhase) {
 
         // get immutable fields
         this.timeStamp = TimeStampUtil.getTimeStamp();
@@ -74,6 +77,7 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
         this.period = period;
         this.timeUnit = ((null != timeUnit) ? timeUnit : DEFAULT_TIME_UNIT);
         this.reflectiveReference = null != reflectiveReference ? reflectiveReference : this.toString();
+        this.applicationPhase = null != applicationPhase ? applicationPhase : ApplicationPhase.INIT;
 
         // set up runnable
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
@@ -83,7 +87,8 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
 
     // add items
     protected boolean add(final JvmResourceDetails resourceDetails) {
-        return this.jvmResourceDetailsContainer.add(resourceDetails, this.reflectiveReference);
+        return this.jvmResourceDetailsContainer.add(
+                resourceDetails, this.reflectiveReference, this.applicationPhase);
     }
 
 
@@ -106,8 +111,20 @@ public abstract class AbstractCrucialJvmResources implements Runnable {
     }
 
 
+    // setter
+    public void setApplicationPhase(final ApplicationPhase applicationPhase) {
+        if (null != applicationPhase) {
+            this.applicationPhase = applicationPhase;
+        }
+    }
+
+
     // getter
     public long getTimeStamp() {
-        return timeStamp;
+        return this.timeStamp;
+    }
+
+    public ApplicationPhase getApplicationPhase() {
+        return this.applicationPhase;
     }
 }

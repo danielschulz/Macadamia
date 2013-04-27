@@ -1,5 +1,6 @@
 package de.novensa.cs.performance.macadamia.management.jvm.resources;
 
+import de.novensa.cs.performance.macadamia.management.jvm.resources.enums.ApplicationPhase;
 import de.novensa.cs.performance.macadamia.util.Constants;
 
 import javax.annotation.Nullable;
@@ -16,15 +17,19 @@ import java.util.TreeMap;
 public class JvmResourceDetailsContainer {
 
     private final List<JvmResourceDetails> details;
-    private final Map<String, List<JvmResourceDetails>> resourceDetailsMap;
+    private final Map<String, List<JvmResourceDetails>> reflectiveReferenceResourceDetailsMap;
+    private final Map<ApplicationPhase, List<JvmResourceDetails>> applicationPhasesResourceDetailsMap;
     private static JvmResourceDetailsContainer container = null;
 
 
     // constructors for singleton
     private JvmResourceDetailsContainer() {
         this.details = new ArrayList<JvmResourceDetails>(Constants.INITIAL_SIZE_OF_MANAGEMENT_HISTORY_LIST);
-        this.resourceDetailsMap = new TreeMap<String, List<JvmResourceDetails>>(
+
+        this.reflectiveReferenceResourceDetailsMap = new TreeMap<String, List<JvmResourceDetails>>(
                 new ReflectiveReferenceToResourceDetailsComparator<String>());
+        this.applicationPhasesResourceDetailsMap = new TreeMap<ApplicationPhase, List<JvmResourceDetails>>(
+                new ReflectiveReferenceToResourceDetailsComparator<ApplicationPhase>());
     }
 
 
@@ -42,14 +47,17 @@ public class JvmResourceDetailsContainer {
         return this.details.contains(resourceDetails);
     }
 
+
     @Nullable
     public boolean hasHistoryItemIn(final int index) {
         return this.details.size() > index && 0 <= index && null != this.details.get(index);
     }
 
+
     public int getHistorySizeAll() {
         return this.details.size();
     }
+
 
     @Nullable
     public JvmResourceDetails get(final int index) {
@@ -66,25 +74,59 @@ public class JvmResourceDetailsContainer {
         return this.details;
     }
 
+
     @Nullable
     public List<JvmResourceDetails> getJvmResourceDetailsForCollector(final String collectorId) {
-        if (null == collectorId) {
-            this.resourceDetailsMap.get(collectorId);
+        if (null != collectorId) {
+            this.reflectiveReferenceResourceDetailsMap.get(collectorId);
         }
 
         return null;
     }
 
-    protected boolean add(final JvmResourceDetails resourceDetails, final String reflectiveReference) {
-        List<JvmResourceDetails> itemFromMap = this.resourceDetailsMap.get(reflectiveReference);
 
-        if (null == itemFromMap) {
-            itemFromMap = new ArrayList<JvmResourceDetails>(Constants.INITIAL_SIZE_OF_MANAGEMENT_HISTORY_LIST);
+    @Nullable
+    public List<JvmResourceDetails> getJvmResourceDetailsForCollector(final ApplicationPhase applicationPhase) {
+        if (null != applicationPhase) {
+            this.applicationPhasesResourceDetailsMap.get(applicationPhase);
         }
 
-        itemFromMap.add(resourceDetails);
-        this.resourceDetailsMap.put(reflectiveReference, itemFromMap);
+        return null;
+    }
 
+
+    protected boolean add(
+            final JvmResourceDetails resourceDetails,
+            final String reflectiveReference,
+            final ApplicationPhase applicationPhase) {
+
+        // reflective reference mapping
+        List<JvmResourceDetails> itemFromReflectiveReferenceMap =
+                this.reflectiveReferenceResourceDetailsMap.get(reflectiveReference);
+
+        if (null == itemFromReflectiveReferenceMap) {
+            itemFromReflectiveReferenceMap =
+                    new ArrayList<JvmResourceDetails>(Constants.INITIAL_SIZE_OF_MANAGEMENT_HISTORY_LIST);
+        }
+
+        itemFromReflectiveReferenceMap.add(resourceDetails);
+        this.reflectiveReferenceResourceDetailsMap.put(reflectiveReference, itemFromReflectiveReferenceMap);
+
+
+        // application phase mapping
+        List<JvmResourceDetails> itemFromApplicationPhasesMap =
+                this.applicationPhasesResourceDetailsMap.get(applicationPhase);
+
+        if (null == itemFromApplicationPhasesMap) {
+            itemFromApplicationPhasesMap =
+                    new ArrayList<JvmResourceDetails>(Constants.INITIAL_SIZE_OF_MANAGEMENT_HISTORY_LIST);
+        }
+
+        itemFromApplicationPhasesMap.add(resourceDetails);
+        this.applicationPhasesResourceDetailsMap.put(applicationPhase, itemFromApplicationPhasesMap);
+
+
+        // simple listing
         return this.details.add(resourceDetails);
     }
 }
