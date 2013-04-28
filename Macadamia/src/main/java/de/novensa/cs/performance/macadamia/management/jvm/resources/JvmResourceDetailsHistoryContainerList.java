@@ -81,7 +81,7 @@ public class JvmResourceDetailsHistoryContainerList<T> extends ArrayList<T> {
 
             // overwrite items
             super.removeRange(0, c.size());
-            super.addAll(c);
+            return super.addAll(c);
 
         } else {
             // c is way bigger than it can fit in here -- so the most right items still fitting are taken
@@ -93,15 +93,8 @@ public class JvmResourceDetailsHistoryContainerList<T> extends ArrayList<T> {
             int startingIndex = incomingItems.length - this.circularBufferSize;
             System.arraycopy(incomingItems, startingIndex, resultingItems, 0, this.circularBufferSize);
 
-            super.addAll(Arrays.asList(resultingItems));
+            return super.addAll(Arrays.asList(resultingItems));
         }
-
-
-
-
-
-
-        return super.addAll(c);
     }
 
     @Override
