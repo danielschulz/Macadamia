@@ -15,7 +15,7 @@ public class Marge extends Female implements French, Hedonist {
     private final short iq;
 
     public Marge(short iq) {
-        super("Homer Simpson", 1.8f);
+        super("Marge Simpson", 1.8f);
         this.iq = iq;
     }
 
