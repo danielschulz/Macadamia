@@ -1,6 +1,6 @@
-package de.novensa.cs.performance.macadamia.examplemodels.Sexes;
+package de.novensa.cs.performance.macadamia.examplemodels.sexes;
 
-import de.novensa.cs.performance.macadamia.examplemodels.Nature.Human;
+import de.novensa.cs.performance.macadamia.examplemodels.nature.Human;
 
 /**
  * An example object for testing purpose.

@@ -1,8 +1,8 @@
-package de.novensa.cs.performance.macadamia.examplemodels.Personas;
+package de.novensa.cs.performance.macadamia.examplemodels.personas;
 
-import de.novensa.cs.performance.macadamia.examplemodels.Nationalities.American;
-import de.novensa.cs.performance.macadamia.examplemodels.Nature.Spontanous;
-import de.novensa.cs.performance.macadamia.examplemodels.Sexes.Male;
+import de.novensa.cs.performance.macadamia.examplemodels.nationalities.American;
+import de.novensa.cs.performance.macadamia.examplemodels.nature.Spontanous;
+import de.novensa.cs.performance.macadamia.examplemodels.sexes.Male;
 
 import java.util.Locale;
 

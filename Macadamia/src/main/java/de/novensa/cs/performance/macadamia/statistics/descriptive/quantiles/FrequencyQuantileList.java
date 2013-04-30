@@ -8,11 +8,11 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Quantiles represent an n-quantile from keys and values. If there are no keys then keys and values are the same.
+ * FrequencyQuantileList represent an n-quantile from keys and values. If there are no keys then keys and values are the same.
  *
  * @author Daniel Schulz
  */
-public class Quantiles<K,V extends ConcreteNumber> {
+public class FrequencyQuantileList<K,V extends ConcreteNumber> {
 
     // member fields
     private int breakPointCount;
@@ -26,7 +26,7 @@ public class Quantiles<K,V extends ConcreteNumber> {
 
 
     // constructor
-    protected Quantiles(final List<K> keys, final List<V> values, final int breakPointCount) {
+    protected FrequencyQuantileList(final List<K> keys, final List<V> values, final int breakPointCount) {
         this.breakPointCount = breakPointCount;
         this.keys = keys;
         this.values = values;

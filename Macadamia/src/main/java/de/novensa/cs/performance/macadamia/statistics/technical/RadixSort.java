@@ -1,6 +1,6 @@
 package de.novensa.cs.performance.macadamia.statistics.technical;
 
-import de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles.Quantiles;
+import de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles.FrequencyQuantileList;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,7 +19,7 @@ public class RadixSort {
 
 
     public static <N extends Number> List<N> sort(final List<N> value) {
-        final int max = (Integer) Quantiles.getMinAverageMaxValue(value).getValue2();
+        final int max = (Integer) FrequencyQuantileList.getMinAverageMaxValue(value).getValue2();
         return sortInternal(value, max);
     }
 

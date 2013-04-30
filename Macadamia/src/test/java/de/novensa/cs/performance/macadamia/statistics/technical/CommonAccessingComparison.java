@@ -1,7 +1,7 @@
 package de.novensa.cs.performance.macadamia.statistics.technical;
 
 import de.novensa.cs.performance.macadamia.management.jvm.util.TimeStampUtil;
-import de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles.Quantiles;
+import de.novensa.cs.performance.macadamia.statistics.descriptive.quantiles.FrequencyQuantileList;
 import org.javatuples.Pair;
 
 import java.util.ArrayList;
@@ -69,7 +69,7 @@ public class CommonAccessingComparison extends MasterSortTestCase {
 
     public static long getTimeForRadixAccessing(final List<Integer> values, final Pair<Integer, Integer> minMax) {
 
-        final int max = Quantiles.getMinAverageMaxValue(values).getValue2();
+        final int max = FrequencyQuantileList.getMinAverageMaxValue(values).getValue2();
         System.gc();
         final long start = TimeStampUtil.getTimeStamp();
         List<Integer> result = RadixSort.sort(values, max);

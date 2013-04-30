@@ -1,4 +1,4 @@
-package de.novensa.cs.performance.macadamia.examplemodels.Nationalities;
+package de.novensa.cs.performance.macadamia.examplemodels.nationalities;
 
 import java.util.Locale;
 

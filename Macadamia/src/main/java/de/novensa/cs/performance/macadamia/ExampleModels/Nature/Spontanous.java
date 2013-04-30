@@ -1,4 +1,4 @@
-package de.novensa.cs.performance.macadamia.examplemodels.Nature;
+package de.novensa.cs.performance.macadamia.examplemodels.nature;
 
 /**
  * An example object for testing purpose.

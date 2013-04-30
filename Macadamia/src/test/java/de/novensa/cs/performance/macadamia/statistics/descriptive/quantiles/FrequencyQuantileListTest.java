@@ -9,14 +9,14 @@ import org.junit.Test;
  *
  * @author Daniel Schulz
  */
-public class QuantilesTest extends QuantilesMasterTestCase {
+public class FrequencyQuantileListTest extends QuantilesMasterTestCase {
 
     @SuppressWarnings("JUnit4AnnotatedMethodInJUnit3TestCase")
     @Test
     public void testMinMaxValues() throws Exception {
         // init
         Triplet<ConcreteNumber<Long>, Double, ConcreteNumber<Long>> minAverageMaxValue =
-                Quantiles.getMinAverageMaxValue(VALUE_LIST);
+                FrequencyQuantileList.getMinAverageMaxValue(VALUE_LIST);
 
         Long min = minAverageMaxValue.getValue0().longValue();
         Long max = minAverageMaxValue.getValue2().longValue();
