@@ -17,7 +17,9 @@ public class Quantiles<K,V extends ConcreteNumber> {
     // member fields
     private int breakPointCount;
     private Triplet<V, Double, V> minAverageMax;
-    private Double squaredDeviation;
+    private Double variance;
+    private Double standardDeviation;
+    private V mode;
     private V median;
     private List<K> keys;
     private List<V> values;
@@ -37,7 +39,7 @@ public class Quantiles<K,V extends ConcreteNumber> {
 
         // get quantiles
 
-        // get median and set squared deviation
+        // get mode and median and set squared deviation
     }
 
 
@@ -96,6 +98,10 @@ public class Quantiles<K,V extends ConcreteNumber> {
         return minAverageMax.getValue2();
     }
 
+    public V getMode() {
+        return mode;
+    }
+
     public V getMedian() {
         return median;
     }
@@ -108,7 +114,11 @@ public class Quantiles<K,V extends ConcreteNumber> {
         return values;
     }
 
-    public Double getSquaredDeviation() {
-        return squaredDeviation;
+    public Double getVariance() {
+        return variance;
+    }
+
+    public Double getStandardDeviation() {
+        return standardDeviation;
     }
 }
